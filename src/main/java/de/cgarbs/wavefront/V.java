@@ -8,7 +8,7 @@ package de.cgarbs.wavefront;
  * V is shorthand vor Vertex, a point in 3D space. 
  * 
  * @author Christian Garbs <mitch@cgarbs.de>
- * @since 0.1
+ * @since 0.1.0
  *
  */
 public class V {
@@ -23,7 +23,7 @@ public class V {
 	 * @param x x coordinate
 	 * @param y y coordinate
 	 * @param z z coordinate
-	 * @since 0.1
+	 * @since 0.1.0
 	 */
 	public V(double x, double y, double z) {
 		this.x = x;

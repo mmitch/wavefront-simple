@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  * See file format description at https://en.wikipedia.org/wiki/Wavefront_.obj_file}
  * 
  * @author Christian Garbs <mitch@cgarbs.de>
- * @since 0.1
+ * @since 0.1.0
  *
  */
 public class Obj {
@@ -34,7 +34,7 @@ public class Obj {
 	 * Adds a face to the object.
 	 * 
 	 * @param vertices the vertices of the face
-	 * @since 0.1
+	 * @since 0.1.0
 	 */
 	public void addFace(V... vertices) {
 		int[] vIndices = Stream.of(vertices) //
@@ -48,7 +48,7 @@ public class Obj {
 	 * Does not close the stream after writing.
 	 *  
 	 * @param ps the PrintStream to write to
-	 * @since 0.1
+	 * @since 0.1.0
 	 */
 	public void writeTo(PrintStream ps) {
 		writeVertices(ps);
