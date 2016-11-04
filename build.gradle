@@ -24,7 +24,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			groupId = 'de.cgarbs'
-			artifactId = 'cgarbs-javalib-test'
+			artifactId = 'wavefront-simple'
 
 			from components.java
 		}
