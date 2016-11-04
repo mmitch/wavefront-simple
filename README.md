@@ -18,6 +18,6 @@ TODOs
 copyright
 ---------
 
-wavefront-simple - generate simple 3D models in Wavefront .obj file format
+wavefront-simple - generate simple 3D models in Wavefront .obj file format  
 Copyright (C) 2016  Christian Garbs <<mitch@cgarbs.de>>  
 Licensed under GNU GPL v3 (or later)
