@@ -20,10 +20,19 @@ class ObjWriter
 
 	public void writeTo(OutputStream os)
 	{
-		PrintStream ps = new PrintStream(os);
+		PrintStream ps = createOrKeepPrintStream(os);
 		writeVertices(ps);
 		writeFaces(ps);
 
+	}
+
+	private PrintStream createOrKeepPrintStream(OutputStream os)
+	{
+		if (os instanceof PrintStream)
+		{
+			return (PrintStream) os;
+		}
+		return new PrintStream(os);
 	}
 
 	private List<V> getUniqueVertices()
