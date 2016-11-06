@@ -4,17 +4,24 @@
  */
 package de.cgarbs.wavefront;
 
-import java.util.stream.IntStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
-class Face {
+// TODO: make class public, otherwise Obj.addFace(Face) is bogus
+class Face
+{
 
-	private int[] vNumbers;
+	private List<V> vertices;
 
-	public Face(int[] vNumbers) {
-		this.vNumbers = vNumbers;
+	public Face(V... vertices)
+	{
+		// TODO: require at least 3 vertices
+		this.vertices = Arrays.asList(vertices);
 	}
 
-	public IntStream vertices() {
-		return IntStream.of(vNumbers);
+	public Stream<V> vertices()
+	{
+		return vertices.stream();
 	}
 }

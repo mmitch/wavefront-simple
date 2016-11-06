@@ -4,45 +4,42 @@
  */
 package de.cgarbs.wavefront;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
-import de.cgarbs.wavefront.test.util.CaptureOutputStream;
+import de.cgarbs.wavefront.meta.ArgSupplier;
+import de.cgarbs.wavefront.test.util.NullOutputStream;
 
-public class ObjTest {
-
+public class ObjTest
+{
 	@Test
-	public void faceIsConvertedToVertices() {
+	public void writingToFilePassesFacesToWriter()
+	{
+		// given
 		Obj obj = new Obj();
+		List<Face> captureList = new ArrayList<>();
+		obj.objWriterSupplier = getMockedSupplier(captureList);
 		obj.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
-		assertThat(obj.getVertices(), hasSize(3));
-		assertThat(obj.getFaces(), hasSize(1));
+
+		// when
+		obj.writeTo(new PrintStream(new NullOutputStream()));
+
+		// then
+		assertThat(captureList, hasSize(1));
 	}
 
-	@Test
-	public void duplicateVertexIsRemoved() {
-		Obj obj = new Obj();
-		obj.addFace(new V(1, 1, 1), new V(2, 2, 2), new V(1, 1, 1));
-		assertThat(obj.getVertices(), hasSize(2));
-		assertThat(obj.getFaces(), hasSize(1));
-	}
-
-	@Test
-	public void checkTriangleFile() {
-		Obj obj = new Obj();
-		obj.addFace(new V(0,0,1), new V(0, 1,0), new V(1,0,0));
-		CaptureOutputStream os = new CaptureOutputStream();
-		obj.writeTo(new PrintStream(os));
-		assertThat(os.getCapture(), is( //
-				"V 0 0 1\n" + //
-				"V 0 1 0\n" + //
-				"V 1 0 0\n" + //
-				"f 1 2 3\n" //
-				));
-	}
+	ArgSupplier<ObjWriter, List<Face>> getMockedSupplier(final List<Face> captureList)
+	{
+		return (arg) -> {
+			captureList.addAll(arg);
+			return mock(ObjWriter.class);
+		};
+	};
 }

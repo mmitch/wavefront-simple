@@ -1,3 +1,4 @@
+package de.cgarbs.wavefront;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
