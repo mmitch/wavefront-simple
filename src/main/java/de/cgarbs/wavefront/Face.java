@@ -4,6 +4,7 @@
  */
 package de.cgarbs.wavefront;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -12,12 +13,14 @@ import java.util.stream.Stream;
 class Face
 {
 
-	private List<V> vertices;
+	private List<V> vertices = new ArrayList<>();
 
-	public Face(V... vertices)
+	public Face(V v1, V v2, V v3, V... additionalVertices)
 	{
-		// TODO: require at least 3 vertices
-		this.vertices = Arrays.asList(vertices);
+		vertices.add(v1);
+		vertices.add(v2);
+		vertices.add(v3);
+		vertices.addAll(Arrays.asList(additionalVertices));
 	}
 
 	public Stream<V> vertices()

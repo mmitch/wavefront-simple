@@ -42,16 +42,23 @@ public class Obj
 	}
 
 	/**
-	 * Adds a face to the object. Convenience
-	 * method to be called with vertices.
+	 * Adds a face to the object. Convenience method
+	 * to be called with at least three vertices.
 	 * 
-	 * @param vertices
+	 * 
+	 * @param v1
+	 *            first vertex
+	 * @param v2
+	 *            second vertex
+	 * @param v3
+	 *            third vertex
+	 * @param additionalVertices
 	 *            the vertices of the face
 	 * @since 0.1.0
 	 */
-	public void addFace(V... vertices)
+	public void addFace(V v1, V v2, V v3, V... additionalVertices)
 	{
-		addFace(new Face(vertices));
+		addFace(new Face(v1, v2, v3, additionalVertices));
 	}
 
 	/**
