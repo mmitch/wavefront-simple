@@ -1,5 +1,6 @@
 package de.cgarbs.wavefront;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Formatter;
 import java.util.List;
@@ -17,8 +18,9 @@ class ObjWriter
 		this.uniqueVertices = getUniqueVertices();
 	}
 
-	public void writeTo(PrintStream ps)
+	public void writeTo(OutputStream os)
 	{
+		PrintStream ps = new PrintStream(os);
 		writeVertices(ps);
 		writeFaces(ps);
 

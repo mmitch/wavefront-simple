@@ -4,7 +4,7 @@
  */
 package de.cgarbs.wavefront;
 
-import java.io.PrintStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,17 +62,16 @@ public class Obj
 	}
 
 	/**
-	 * Writes the .obj file to a PrintStream.
+	 * Writes the .obj file to an OutputStream.
 	 * Does not close the stream after writing.
 	 * 
-	 * @param ps
-	 *            the PrintStream to write to
+	 * @param os
+	 *            the OutputStream to write to
 	 * @since 0.1.0
 	 */
-	public void writeTo(PrintStream ps)
+	public void writeTo(OutputStream os)
 	{
-		// TODO: OutputStream is enough, build the PrintStream internally
-		objWriterSupplier.get(faces).writeTo(ps);
+		objWriterSupplier.get(faces).writeTo(os);
 	}
 
 }

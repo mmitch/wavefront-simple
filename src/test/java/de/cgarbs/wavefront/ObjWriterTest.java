@@ -8,7 +8,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 
-import java.io.PrintStream;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class ObjWriterTest
 		Face face = new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
 		ObjWriter writer = new ObjWriter(Arrays.asList(face));
 		CaptureOutputStream os = new CaptureOutputStream();
-		writer.writeTo(new PrintStream(os));
+		writer.writeTo(os);
 		assertThat(os.getCapture(),
 				is( //
 						"V 0 0 1\n" + //

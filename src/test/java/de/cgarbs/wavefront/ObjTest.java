@@ -8,7 +8,6 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class ObjTest
 		obj.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
 
 		// when
-		obj.writeTo(new PrintStream(new NullOutputStream()));
+		obj.writeTo(new NullOutputStream());
 
 		// then
 		assertThat(captureList, hasSize(1));
