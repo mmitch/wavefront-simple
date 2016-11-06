@@ -12,20 +12,25 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class CaptureOutputStreamTest {
-	
+public class CaptureOutputStreamTest
+{
+
 	@Test
-	public void captureWrittenByte() throws IOException {
+	public void captureWrittenByte() throws IOException
+	{
 		CaptureOutputStream cos = new CaptureOutputStream();
 		cos.write('h');
 		assertThat(cos.getCapture(), is("h"));
+		cos.close();
 	}
-	
+
 	@Test
-	public void capturePrintStream() {
+	public void capturePrintStream() throws IOException
+	{
 		CaptureOutputStream cos = new CaptureOutputStream();
 		PrintStream ps = new PrintStream(cos);
 		ps.println("Hello world");
 		assertThat(cos.getCapture(), is("Hello world\n"));
+		cos.close();
 	}
 }
