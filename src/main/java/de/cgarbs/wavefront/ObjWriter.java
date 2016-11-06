@@ -26,13 +26,10 @@ class ObjWriter
 
 	private List<V> getUniqueVertices()
 	{
-		System.out.println("---");
 		return faces.stream() //
 				.flatMap(Face::vertices) //
 				.sorted() //
-				.peek((v) -> System.out.println(v)) //
 				.distinct() //
-				.peek((v) -> System.out.println("\t" + v)) //
 				.collect(Collectors.toList());
 	}
 
