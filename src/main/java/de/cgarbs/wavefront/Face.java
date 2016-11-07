@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 // TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face
+class Face implements Comparable<Face>
 {
 
 	private List<V> vertices = new ArrayList<>();
@@ -27,6 +28,14 @@ class Face
 	public Stream<V> vertices()
 	{
 		return vertices.stream();
+	}
+
+	@Override
+	public String toString()
+	{
+		return vertices.stream() //
+				.map(V::toString) //
+				.collect(Collectors.joining(" ", "F{", "}"));
 	}
 
 	@Override
@@ -55,5 +64,22 @@ class Face
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(Face that)
+	{
+		int c;
+		c = this.vertices.size() - that.vertices.size();
+		if (c == 0)
+		{
+			Iterator<V> ours = this.vertices.stream().sorted().iterator();
+			Iterator<V> theirs = that.vertices.stream().sorted().iterator();
+			while (c == 0 && ours.hasNext())
+			{
+				c = theirs.next().compareTo(ours.next());
+			}
+		}
+		return c;
 	}
 }

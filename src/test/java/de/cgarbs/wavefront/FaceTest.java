@@ -6,7 +6,10 @@ package de.cgarbs.wavefront;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.junit.Assert.assertThat;
+
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -36,4 +39,15 @@ public class FaceTest
 		assertThat(f1, is(f2));
 	}
 
+	@Test
+	public void compareToSortsByVertexCoundFollowedBySortedVertices()
+	{
+		Face f1 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0), new V(3, 3, 3));
+		Face f2 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0));
+		Face f3 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0), new V(3, 0, 0));
+		Face f4 = new Face(new V(0, 0, 0), new V(2, 0, 0), new V(0, 1, 2));
+		Face[] arr = new Face[] { f1, f2, f3, f4 };
+		Arrays.sort(arr);
+		assertThat(arr, arrayContaining(f2, f4, f3, f1));
+	}
 }
