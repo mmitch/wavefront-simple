@@ -54,12 +54,16 @@ public class V implements Comparable<V>
 	@Override
 	public boolean equals(Object o)
 	{
+		if (this == o)
+		{
+			return true;
+		}
 		if (!(o instanceof V))
 		{
 			return false;
 		}
 		V v = (V) o;
-		return this == v || (this.x == v.x && this.y == v.y && this.z == v.z);
+		return this.x == v.x && this.y == v.y && this.z == v.z;
 	}
 
 	@Override
