@@ -6,6 +6,7 @@ package de.cgarbs.wavefront;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -26,5 +27,33 @@ class Face
 	public Stream<V> vertices()
 	{
 		return vertices.stream();
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Face))
+		{
+			return false;
+		}
+		Face f = (Face) o;
+		if (this.vertices.size() != f.vertices.size())
+		{
+			return false;
+		}
+		Iterator<V> ours = this.vertices.stream().sorted().iterator();
+		Iterator<V> theirs = f.vertices.stream().sorted().iterator();
+		while (ours.hasNext())
+		{
+			if (!ours.next().equals(theirs.next()))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }
