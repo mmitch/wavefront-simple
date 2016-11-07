@@ -16,6 +16,14 @@ import org.junit.Test;
 public class FaceTest
 {
 	@Test
+	public void translationMovesAllVertices()
+	{
+		Face f = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0));
+		f.translate(new Vec(0.25, -0.5, 0.125));
+		assertThat(f, is(new Face(new V(0.25, -0.5, 0.125), new V(0.25, 0.5, 1.125), new V(2.25, -0.5, 0.125))));
+	}
+
+	@Test
 	public void facesWithDifferentNumbersOfVerticesAreNotEqual()
 	{
 		Face f1 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0));

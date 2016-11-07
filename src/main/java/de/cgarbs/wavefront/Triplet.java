@@ -7,9 +7,9 @@ package de.cgarbs.wavefront;
 abstract class Triplet implements Comparable<Triplet>
 {
 
-	protected final double x;
-	protected final double y;
-	protected final double z;
+	private double x;
+	private double y;
+	private double z;
 	private String shorthand;
 
 	protected Triplet(double x, double y, double z, String shorthand)
@@ -18,6 +18,21 @@ abstract class Triplet implements Comparable<Triplet>
 		this.y = y;
 		this.z = z;
 		this.shorthand = shorthand;
+	}
+
+	public double getX()
+	{
+		return x;
+	}
+
+	public double getY()
+	{
+		return y;
+	}
+
+	public double getZ()
+	{
+		return z;
 	}
 
 	@Override
@@ -67,6 +82,13 @@ abstract class Triplet implements Comparable<Triplet>
 			return -1;
 		}
 		return 0;
+	}
+
+	protected void translate(Vec vector)
+	{
+		x += vector.getX();
+		y += vector.getY();
+		z += vector.getZ();
 	}
 
 }

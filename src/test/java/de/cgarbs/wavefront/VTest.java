@@ -12,6 +12,14 @@ import org.junit.Test;
 public class VTest
 {
 	@Test
+	public void translatingChangesCoordinates()
+	{
+		V v = new V(1, 2, 3);
+		v.translate(new Vec(0.5, -0.25, 0.125));
+		assertThat(v, is(new V(1.5, 1.75, 3.125)));
+	}
+
+	@Test
 	public void sameValuesAreEqual()
 	{
 		V v1 = new V(1, 2, 3);

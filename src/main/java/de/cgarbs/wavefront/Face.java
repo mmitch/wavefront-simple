@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 // TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face implements Comparable<Face>
+class Face implements Comparable<Face>, Translatable
 {
 
 	private List<V> vertices = new ArrayList<>();
@@ -28,6 +28,13 @@ class Face implements Comparable<Face>
 	public Stream<V> vertices()
 	{
 		return vertices.stream();
+	}
+
+	@Override
+	public void translate(Vec vector)
+	{
+		vertices.stream() //
+				.forEach((v) -> v.translate(vector));
 	}
 
 	@Override
@@ -82,4 +89,5 @@ class Face implements Comparable<Face>
 		}
 		return c;
 	}
+
 }

@@ -11,7 +11,7 @@ package de.cgarbs.wavefront;
  * @since 0.1.0
  *
  */
-public class V extends Triplet
+public class V extends Triplet implements Translatable
 {
 
 	/**
@@ -28,6 +28,12 @@ public class V extends Triplet
 	public V(double x, double y, double z)
 	{
 		super(x, y, z, "V");
+	}
+
+	@Override
+	public void translate(Vec vector)
+	{
+		super.translate(vector);
 	}
 
 }

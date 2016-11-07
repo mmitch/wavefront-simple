@@ -47,7 +47,7 @@ class ObjWriter
 	private void writeVertices(PrintStream ps)
 	{
 		Formatter formatter = new Formatter(Locale.ENGLISH);
-		uniqueVertices.forEach((v) -> formatter.format("V %.0f %.0f %.0f\n", v.x, v.y, v.z));
+		uniqueVertices.forEach((v) -> formatter.format("V %.0f %.0f %.0f\n", v.getX(), v.getY(), v.getZ()));
 		ps.print(formatter.toString());
 		formatter.close();
 	}
