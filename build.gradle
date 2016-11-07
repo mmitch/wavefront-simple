@@ -37,6 +37,14 @@ publishing {
 			artifactId = 'wavefront-simple'
 
 			from components.java
+
+			artifact packageSources {
+				classifier 'sources'
+			}
+
+			artifact packageJavadoc {
+				classifier 'javadoc'
+			}
 		}
 	}
 }
@@ -62,6 +70,14 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.2.11'
 }
 
+task packageSources(type: Jar, dependsOn: 'classes') {
+	from sourceSets.main.allSource
+	classifier = 'sources'
+}
+task packageJavadoc(type: Jar, dependsOn: 'javadoc') {
+	from javadoc
+	classifier = 'javadoc'
+}
 
  /***
  **** my own tasks
