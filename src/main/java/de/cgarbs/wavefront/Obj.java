@@ -19,7 +19,7 @@ import de.cgarbs.wavefront.meta.ArgSupplier;
  * See file format description at
  * https://en.wikipedia.org/wiki/Wavefront_.obj_file}
  * 
- * @author Christian Garbs <mitch@cgarbs.de>
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.1.0
  *
  */

@@ -7,7 +7,7 @@ package de.cgarbs.wavefront;
 /**
  * V is shorthand vor Vertex, a point in 3D space.
  * 
- * @author Christian Garbs <mitch@cgarbs.de>
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.1.0
  *
  */

@@ -3,7 +3,7 @@ package de.cgarbs.wavefront.meta;
 /**
  * A Supplier for Classes with one-argument constructors.
  * 
- * @author Christian Garbs <mitch@cgarbs.de>
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.2.0
  *
  * @param <R>
