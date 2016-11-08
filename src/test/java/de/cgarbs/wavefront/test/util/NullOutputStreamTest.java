@@ -11,5 +11,6 @@ public class NullOutputStreamTest
 	{
 		NullOutputStream nos = new NullOutputStream();
 		nos.write('h');
+		nos.close();
 	}
 }
