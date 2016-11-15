@@ -57,7 +57,7 @@ public class Obj implements Operable<Obj>
 	 * @param v3
 	 *            third vertex
 	 * @param additionalVertices
-	 *            the vertices of the face
+	 *            possible further vertices of the face
 	 * @since 0.1.0
 	 */
 	public void addFace(V v1, V v2, V v3, V... additionalVertices)
