@@ -11,30 +11,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import de.cgarbs.wavefront.op.Operable;
+import de.cgarbs.wavefront.op.Operation;
+
 // TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face implements Comparable<Face>, Translatable
+class Face implements Comparable<Face>, Operable<Face>
 {
 
 	private List<V> vertices = new ArrayList<>();
 
 	public Face(V v1, V v2, V v3, V... additionalVertices)
 	{
+		// TODO: delegate to plain List constructor? but building an
+		// intermediate List is unneeded overhead
 		vertices.add(v1);
 		vertices.add(v2);
 		vertices.add(v3);
 		vertices.addAll(Arrays.asList(additionalVertices));
 	}
 
+	private Face(List<V> vertices)
+	{
+		this.vertices.addAll(vertices);
+	}
+
 	public Stream<V> vertices()
 	{
 		return vertices.stream();
-	}
-
-	@Override
-	public void translate(Vec vector)
-	{
-		vertices.stream() //
-				.forEach((v) -> v.translate(vector));
 	}
 
 	@Override
@@ -88,6 +91,16 @@ class Face implements Comparable<Face>, Translatable
 			}
 		}
 		return c;
+	}
+
+	@Override
+	public Face apply(Operation operation)
+	{
+		return new Face( //
+				vertices() //
+						.map((v) -> v.apply(operation)) //
+						.collect(Collectors.toList()) //
+		);
 	}
 
 }

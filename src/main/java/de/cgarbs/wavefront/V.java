@@ -4,6 +4,9 @@
  */
 package de.cgarbs.wavefront;
 
+import de.cgarbs.wavefront.op.Operable;
+import de.cgarbs.wavefront.op.Operation;
+
 /**
  * V is shorthand vor Vertex, a point in 3D space.
  * 
@@ -11,7 +14,7 @@ package de.cgarbs.wavefront;
  * @since 0.1.0
  *
  */
-public class V extends Triplet implements Translatable
+public class V extends Triplet implements Operable<V>
 {
 
 	/**
@@ -31,9 +34,12 @@ public class V extends Triplet implements Translatable
 	}
 
 	@Override
-	public void translate(Vec vector)
+	public V apply(Operation operation)
 	{
-		super.translate(vector);
+		return new V( //
+				operation.applyX(getX()), //
+				operation.applyY(getY()), //
+				operation.applyZ(getZ()) //
+		);
 	}
-
 }

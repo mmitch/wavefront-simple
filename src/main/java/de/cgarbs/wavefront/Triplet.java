@@ -68,7 +68,7 @@ abstract class Triplet implements Comparable<Triplet>
 	@Override
 	public String toString()
 	{
-		return String.format("%s[%.0f %.0f %.0f]", shorthand, x, y, z);
+		return String.format("%s[%.1f %.1f %.1f]", shorthand, x, y, z);
 	}
 
 	private int compare(double d1, double d2)
@@ -82,13 +82,6 @@ abstract class Triplet implements Comparable<Triplet>
 			return -1;
 		}
 		return 0;
-	}
-
-	protected void translate(Vec vector)
-	{
-		x += vector.getX();
-		y += vector.getY();
-		z += vector.getZ();
 	}
 
 }

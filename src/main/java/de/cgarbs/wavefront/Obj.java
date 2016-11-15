@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.cgarbs.wavefront.meta.ArgSupplier;
+import de.cgarbs.wavefront.op.Operable;
+import de.cgarbs.wavefront.op.Operation;
 
 /**
  * minimal Wavefront .obj file writer
@@ -19,11 +21,13 @@ import de.cgarbs.wavefront.meta.ArgSupplier;
  * See file format description at
  * https://en.wikipedia.org/wiki/Wavefront_.obj_file}
  * 
+ * This class represents an Object/a full Scene.
+ * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.1.0
  *
  */
-public class Obj
+public class Obj implements Operable<Obj>
 {
 	ArgSupplier<ObjWriter, List<Face>> objWriterSupplier = ObjWriter::new;
 
@@ -72,6 +76,16 @@ public class Obj
 	public void writeTo(OutputStream os)
 	{
 		objWriterSupplier.get(faces).writeTo(os);
+	}
+
+	@Override
+	public Obj apply(Operation operation)
+	{
+		Obj ret = new Obj();
+		faces.stream() //
+				.map((f) -> f.apply(operation)) //
+				.forEach(ret::addFace);
+		return ret;
 	}
 
 }

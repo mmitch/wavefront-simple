@@ -4,9 +4,27 @@
  */
 package de.cgarbs.wavefront;
 
-class Vec extends Triplet
+/**
+ * A vector in 3D space.
+ * 
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
+ *
+ */
+public class Vec extends Triplet
 {
-	protected Vec(double x, double y, double z)
+	/**
+	 * Creates a new vector with the given dimensions.
+	 * 
+	 * TODO: find proper names for this
+	 * 
+	 * @param x
+	 *            x offset
+	 * @param y
+	 *            y offset
+	 * @param z
+	 *            z offset
+	 */
+	public Vec(double x, double y, double z)
 	{
 		super(x, y, z, "Vec");
 	}
