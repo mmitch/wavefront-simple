@@ -4,6 +4,9 @@
  */
 package de.cgarbs.wavefront;
 
+import de.cgarbs.wavefront.op.Operable;
+import de.cgarbs.wavefront.op.Operation;
+
 /**
  * A coordinate is a point in 3D space.
  * 
@@ -11,7 +14,7 @@ package de.cgarbs.wavefront;
  * @since 0.1.0
  *
  */
-public class Coordinate extends Triplet
+public class Coordinate extends Triplet implements Operable<Coordinate>
 {
 	/**
 	 * Creates a new coordinate.
@@ -27,5 +30,15 @@ public class Coordinate extends Triplet
 	public Coordinate(double x, double y, double z)
 	{
 		super(x, y, z, "C");
+	}
+
+	@Override
+	public Coordinate apply(Operation operation)
+	{
+		return new Coordinate( //
+				operation.applyX(getX()), //
+				operation.applyY(getY()), //
+				operation.applyZ(getZ()) //
+		);
 	}
 }
