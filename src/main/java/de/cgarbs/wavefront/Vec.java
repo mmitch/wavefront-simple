@@ -28,4 +28,21 @@ public class Vec extends Triplet
 	{
 		super(x, y, z, "Vec");
 	}
+
+	/**
+	 * Creates a new vector connecting two given coordinates.
+	 * 
+	 * @param from
+	 *            start point of vector
+	 * @param to
+	 *            end point of vector
+	 */
+	public Vec(Coordinate from, Coordinate to)
+	{
+		this( //
+				to.getX() - from.getX(), //
+				to.getY() - from.getY(), //
+				to.getZ() - from.getZ() //
+		);
+	}
 }
