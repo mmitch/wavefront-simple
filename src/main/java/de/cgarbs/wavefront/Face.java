@@ -11,11 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import de.cgarbs.wavefront.op.FindGreatest;
+import de.cgarbs.wavefront.op.FindSmallest;
 import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
+import de.cgarbs.wavefront.op.Program;
 
 // TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face implements Comparable<Face>, Operable<Face>
+class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox
 {
 
 	private List<V> vertices = new ArrayList<>();
@@ -100,6 +103,20 @@ class Face implements Comparable<Face>, Operable<Face>
 				vertices() //
 						.map((v) -> v.apply(operation)) //
 						.collect(Collectors.toList()) //
+		);
+	}
+
+	@Override
+	public BoundingBox getBoundingBox()
+	{
+		FindSmallest smallest = new FindSmallest();
+		FindGreatest greatest = new FindGreatest();
+
+		apply(new Program(smallest, greatest));
+
+		return new BoundingBox( //
+				smallest.getResult(), //
+				greatest.getResult() //
 		);
 	}
 

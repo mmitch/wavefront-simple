@@ -60,4 +60,15 @@ public class FaceTest
 		Arrays.sort(arr);
 		assertThat(arr, arrayContaining(f2, f4, f3, f1));
 	}
+
+	@Test
+	public void boundingBoxIstToSmallestAndGreatestCoordinates()
+	{
+		Face f = new Face(new V(1, 3, 9), new V(-2, -17, 12), new V(0, 18, -1));
+
+		BoundingBox bb = f.getBoundingBox();
+
+		assertThat(bb.getFirst(), is(new Coordinate(-2, -17, -1)));
+		assertThat(bb.getSecond(), is(new Coordinate(1, 18, 12)));
+	}
 }
