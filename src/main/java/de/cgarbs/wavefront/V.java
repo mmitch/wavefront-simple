@@ -8,7 +8,8 @@ import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
 
 /**
- * V is shorthand vor Vertex, a point in 3D space.
+ * V is shorthand vor Vertex, a point in 3D space
+ * that is part of a Face.
  * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.1.0
@@ -31,6 +32,18 @@ public class V extends Triplet implements Operable<V>
 	public V(double x, double y, double z)
 	{
 		super(x, y, z, "V");
+	}
+
+	/**
+	 * Creates a new vertex at the given Coordinate.
+	 * 
+	 * @param c
+	 *            the Coordinate
+	 * @since 0.3.0
+	 */
+	public V(Coordinate c)
+	{
+		this(c.getX(), c.getY(), c.getZ());
 	}
 
 	@Override

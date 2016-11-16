@@ -45,4 +45,12 @@ public class VTest
 		Arrays.sort(arr);
 		assertThat(arr, arrayContaining(v4, v2, v3, v1));
 	}
+
+	@Test
+	public void vertexCanBeCreatedAtGivenCoordinate()
+	{
+		Coordinate c = new Coordinate(1, 2, 3);
+		V v = new V(c);
+		assertThat(v, is(new V(1, 2, 3)));
+	}
 }
