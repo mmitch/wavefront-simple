@@ -4,13 +4,16 @@
  */
 package de.cgarbs.wavefront;
 
+import de.cgarbs.wavefront.op.Operable;
+import de.cgarbs.wavefront.op.Operation;
+
 /**
  * A vector in 3D space.
  * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  *
  */
-public class Vec extends Triplet
+public class Vec extends Triplet implements Operable<Vec>
 {
 	/**
 	 * Creates a new vector with the given dimensions.
@@ -43,6 +46,16 @@ public class Vec extends Triplet
 				to.getX() - from.getX(), //
 				to.getY() - from.getY(), //
 				to.getZ() - from.getZ() //
+		);
+	}
+
+	@Override
+	public Vec apply(Operation operation)
+	{
+		return new Vec( //
+				operation.applyX(getX()), //
+				operation.applyY(getY()), //
+				operation.applyZ(getZ()) //
 		);
 	}
 }
