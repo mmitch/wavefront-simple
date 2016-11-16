@@ -7,10 +7,10 @@ package de.cgarbs.wavefront;
 abstract class Triplet implements Comparable<Triplet>
 {
 
-	private double x;
-	private double y;
-	private double z;
-	private String shorthand;
+	private final double x;
+	private final double y;
+	private final double z;
+	private final String shorthand;
 
 	protected Triplet(double x, double y, double z, String shorthand)
 	{
