@@ -4,7 +4,7 @@
  */
 package de.cgarbs.wavefront.op;
 
-import de.cgarbs.wavefront.V;
+import de.cgarbs.wavefront.Coordinate;
 
 abstract class Accumulator implements Operation
 {
@@ -29,10 +29,9 @@ abstract class Accumulator implements Operation
 	 * 
 	 * @since 0.3.0
 	 */
-	public V getResult()
+	public Coordinate getResult()
 	{
-		// TODO: return something like a Coordinate instead of a Vertex?
-		return new V(x, y, z);
+		return new Coordinate(x, y, z);
 	}
 
 	@Override

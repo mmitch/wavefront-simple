@@ -9,6 +9,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import de.cgarbs.wavefront.Coordinate;
 import de.cgarbs.wavefront.V;
 
 public class FindSmallestTest
@@ -19,6 +20,6 @@ public class FindSmallestTest
 		FindSmallest accumulator = new FindSmallest();
 		new V(1, 2, 3).apply(accumulator);
 		new V(3, 1, -1).apply(accumulator);
-		assertThat(accumulator.getResult(), is(new V(1, 1, -1)));
+		assertThat(accumulator.getResult(), is(new Coordinate(1, 1, -1)));
 	}
 }
