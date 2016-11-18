@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
@@ -60,6 +61,17 @@ public class CoordinatePair implements Iterable<Coordinate>, Operable<Coordinate
 	public Coordinate getSecond()
 	{
 		return coordinates.get(1);
+	}
+
+	/**
+	 * returns a sequential Stream of both coordinates
+	 * 
+	 * @return a Stream of both coordinates
+	 * @since 0.3.0
+	 */
+	public Stream<Coordinate> stream()
+	{
+		return coordinates.stream();
 	}
 
 	@Override

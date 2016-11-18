@@ -7,7 +7,10 @@ package de.cgarbs.wavefront;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -26,6 +29,17 @@ public class CoordinatePairTest
 		assertThat(iter.next(), is(c1));
 		assertThat(iter.next(), is(c2));
 		assertThat(iter.hasNext(), is(false));
+	}
+
+	@Test
+	public void streamReturnsBothCoordinatesInOrder()
+	{
+		Coordinate c1 = new Coordinate(-1, -2, -3);
+		Coordinate c2 = new Coordinate(4, 6, 9);
+		CoordinatePair pair = new CoordinatePair(c1, c2);
+
+		List<Coordinate> result = pair.stream().collect(Collectors.toList());
+		assertThat(result, is(Arrays.asList(c1, c2)));
 	}
 
 	@Test
