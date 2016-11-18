@@ -54,4 +54,14 @@ public class CoordinatePairTest
 		assertThat(result.getFirst(), is(new Coordinate(2, 4, 6)));
 		assertThat(result.getSecond(), is(new Coordinate(-2, -20, -200)));
 	}
+
+	@Test
+	public void toStringContainsBothCoordinates()
+	{
+		Coordinate c1 = new Coordinate(0, 1, 2);
+		Coordinate c2 = new Coordinate(-1, -10, -100);
+		CoordinatePair pair = new CoordinatePair(c1, c2);
+
+		assertThat(pair.toString(), is("CP{" + c1 + " " + c2 + "}"));
+	}
 }

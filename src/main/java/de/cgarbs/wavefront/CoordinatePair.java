@@ -88,4 +88,10 @@ public class CoordinatePair implements Iterable<Coordinate>, Operable<Coordinate
 				getSecond().apply(operation) //
 		);
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("CP{%s %s}", getFirst(), getSecond());
+	}
 }
