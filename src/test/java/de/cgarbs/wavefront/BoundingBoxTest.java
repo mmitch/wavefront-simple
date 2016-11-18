@@ -20,4 +20,14 @@ public class BoundingBoxTest
 		);
 		assertThat(bb.getCenter(), is(new Coordinate(5, -0.5, 6.5)));
 	}
+
+	@Test
+	public void toStringContainsBothCoordinates()
+	{
+		Coordinate c1 = new Coordinate(0, 1, 2);
+		Coordinate c2 = new Coordinate(-1, -10, -100);
+		BoundingBox bb = new BoundingBox(c1, c2);
+
+		assertThat(bb.toString(), is("BB{" + c1 + " " + c2 + "}"));
+	}
 }

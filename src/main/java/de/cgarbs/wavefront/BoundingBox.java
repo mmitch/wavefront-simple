@@ -46,4 +46,10 @@ public class BoundingBox extends CoordinatePair
 		Vec diameter = new Vec(this);
 		return getFirst().apply(new Translation(diameter.apply(new Scale(0.5))));
 	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("BB{%s %s}", getFirst(), getSecond());
+	}
 }
