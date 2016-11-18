@@ -24,8 +24,7 @@ abstract class Accumulator implements Operation
 	/**
 	 * Returns the calculated result of this operation.
 	 * 
-	 * @param the
-	 *            result
+	 * @return the calculated result
 	 * 
 	 * @since 0.3.0
 	 */
