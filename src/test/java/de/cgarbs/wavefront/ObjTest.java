@@ -4,6 +4,7 @@
  */
 package de.cgarbs.wavefront;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -32,6 +33,30 @@ public class ObjTest
 
 		// then
 		assertThat(captureList, hasSize(1));
+	}
+
+	@Test
+	public void boundingBoxReturnsSmallestAndGreatestCoordinatesOfAllFaces()
+	{
+		Face face1 = new Face(//
+				new V(1, 2, 3), //
+				new V(2, 6, 8), //
+				new V(-10, 4, -3) //
+		);
+		Face face2 = new Face(//
+				new V(-1, -2, 3), //
+				new V(2, -6, -8), //
+				new V(10, 4, 3) //
+		);
+
+		Obj obj = new Obj();
+		obj.addFace(face1);
+		obj.addFace(face2);
+
+		BoundingBox bb = obj.getBoundingBox();
+
+		assertThat(bb.getFirst(), is(new Coordinate(-10, -6, -8)));
+		assertThat(bb.getSecond(), is(new Coordinate(10, 6, 8)));
 	}
 
 	ArgSupplier<ObjWriter, List<Face>> getMockedSupplier(final List<Face> captureList)

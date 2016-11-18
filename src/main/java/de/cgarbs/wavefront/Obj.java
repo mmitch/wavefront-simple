@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.cgarbs.wavefront.meta.ArgSupplier;
+import de.cgarbs.wavefront.op.FindGreatest;
+import de.cgarbs.wavefront.op.FindSmallest;
 import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
+import de.cgarbs.wavefront.op.Program;
 
 /**
  * minimal Wavefront .obj file writer
@@ -27,7 +30,7 @@ import de.cgarbs.wavefront.op.Operation;
  * @since 0.1.0
  *
  */
-public class Obj implements Operable<Obj>
+public class Obj implements Operable<Obj>, HasBoundingBox
 {
 	ArgSupplier<ObjWriter, List<Face>> objWriterSupplier = ObjWriter::new;
 
@@ -86,6 +89,21 @@ public class Obj implements Operable<Obj>
 				.map((f) -> f.apply(operation)) //
 				.forEach(ret::addFace);
 		return ret;
+	}
+
+	@Override
+	public BoundingBox getBoundingBox()
+	{
+		FindSmallest smallest = new FindSmallest();
+		FindGreatest greatest = new FindGreatest();
+		Program program = new Program(smallest, greatest);
+
+		faces.stream().map(Face::getBoundingBox).flatMap(BoundingBox::stream).forEach((c) -> c.apply(program));
+
+		return new BoundingBox( //
+				smallest.getResult(), //
+				greatest.getResult() //
+		);
 	}
 
 }
