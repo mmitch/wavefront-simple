@@ -22,7 +22,7 @@ public class FindSmallest extends Accumulator
 	 */
 	public FindSmallest()
 	{
-		super(Double.MAX_VALUE);
+		super(Double.POSITIVE_INFINITY);
 	}
 
 	@Override

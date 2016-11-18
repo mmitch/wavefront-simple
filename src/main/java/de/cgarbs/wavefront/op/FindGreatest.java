@@ -22,7 +22,7 @@ public class FindGreatest extends Accumulator
 	 */
 	public FindGreatest()
 	{
-		super(-Double.MAX_VALUE);
+		super(Double.NEGATIVE_INFINITY);
 	}
 
 	@Override
