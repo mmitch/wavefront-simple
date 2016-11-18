@@ -17,6 +17,11 @@ import de.cgarbs.wavefront.op.Operation;
 public class Coordinate extends Triplet implements Operable<Coordinate>
 {
 	/**
+	 * coordinate of the point of origin
+	 */
+	public final static Coordinate ORIGIN = new Coordinate(0, 0, 0);
+
+	/**
 	 * Creates a new coordinate.
 	 * 
 	 * @param x
