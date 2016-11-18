@@ -41,4 +41,14 @@ public class VecTest
 		assertThat(vNew, not(sameInstance(vOld)));
 		assertThat(vNew, is(vOld));
 	}
+
+	@Test
+	public void vectorOfCoordinatePairEqualsVectorOfTheCoordinates()
+	{
+		Coordinate start = new Coordinate(1, 2, 3);
+		Coordinate end = new Coordinate(17, -33, 9);
+		Vec viaPair = new Vec(new CoordinatePair(start, end));
+		Vec viaCoordinates = new Vec(start, end);
+		assertThat(viaPair, is(viaCoordinates));
+	}
 }

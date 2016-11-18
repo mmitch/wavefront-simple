@@ -49,6 +49,18 @@ public class Vec extends Triplet implements Operable<Vec>
 		);
 	}
 
+	/**
+	 * Creates a new vector from a coordinate pair,
+	 * pointing from the first to the second coordinate.
+	 * 
+	 * @param coordinates
+	 *            the coordinate pair
+	 */
+	public Vec(CoordinatePair coordinates)
+	{
+		this(coordinates.getFirst(), coordinates.getSecond());
+	}
+
 	@Override
 	public Vec apply(Operation operation)
 	{
