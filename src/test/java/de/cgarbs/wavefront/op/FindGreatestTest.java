@@ -18,8 +18,8 @@ public class FindGreatestTest
 	public void maximumOfTWoVerticesIsTheMaximumOfEachCoordinate()
 	{
 		FindGreatest accumulator = new FindGreatest();
-		new V(1, 2, 4).apply(accumulator);
-		new V(3, 1, -1).apply(accumulator);
-		assertThat(accumulator.getResult(), is(new Coordinate(3, 2, 4)));
+		new V(1, -2, 4).apply(accumulator);
+		new V(3, -1, -1).apply(accumulator);
+		assertThat(accumulator.getResult(), is(new Coordinate(3, -1, 4)));
 	}
 }
