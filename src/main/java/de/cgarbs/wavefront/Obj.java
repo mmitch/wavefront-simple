@@ -30,7 +30,7 @@ import de.cgarbs.wavefront.op.Program;
  * @since 0.1.0
  *
  */
-public class Obj implements Operable<Obj>, HasBoundingBox
+public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
 {
 	ArgSupplier<ObjWriter, List<Face>> objWriterSupplier = ObjWriter::new;
 

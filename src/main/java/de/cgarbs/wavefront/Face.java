@@ -18,7 +18,7 @@ import de.cgarbs.wavefront.op.Operation;
 import de.cgarbs.wavefront.op.Program;
 
 // TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox
+class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox, Centerable<Face>
 {
 
 	private List<V> vertices = new ArrayList<>();
