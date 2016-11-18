@@ -4,6 +4,9 @@
  */
 package de.cgarbs.wavefront;
 
+import de.cgarbs.wavefront.op.Scale;
+import de.cgarbs.wavefront.op.Translation;
+
 /**
  * A Bounding Box describes the smallest possible non-rotated cuboid
  * (all edges and faces are parallel to the coordinate axes) that can
@@ -33,4 +36,14 @@ public class BoundingBox extends CoordinatePair
 		super(low, high);
 	}
 
+	/**
+	 * Returns the coordinate of the center of the Bounding Box.
+	 * 
+	 * @return center coordinate of the Bounding Box
+	 */
+	public Coordinate getCenter()
+	{
+		Vec diameter = new Vec(this);
+		return getFirst().apply(new Translation(diameter.apply(new Scale(0.5))));
+	}
 }
