@@ -71,4 +71,18 @@ public class FaceTest
 		assertThat(bb.getFirst(), is(new Coordinate(-2, -17, -1)));
 		assertThat(bb.getSecond(), is(new Coordinate(1, 18, 12)));
 	}
+
+	@Test
+	public void toStringContainsAllVertices()
+	{
+		V v1 = new V(1, 2, 3);
+		V v2 = new V(-2, 5, 7);
+		V v3 = new V(-1, 4, -2);
+		V v4 = new V(0, 3, -2);
+
+		Face f = new Face(v1, v2, v3, v4);
+
+		assertThat(f.toString(), is(String.format("F{%s %s %s %s}", v1, v2, v3, v4)));
+	}
+
 }
