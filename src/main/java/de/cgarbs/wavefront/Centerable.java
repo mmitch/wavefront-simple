@@ -11,7 +11,7 @@ import de.cgarbs.wavefront.op.Translation;
  * A centerable object can be centered on the point of origin
  * regarding its Bounding Box.
  * 
- * @author Christian Garbs <mitch@cgarbs.de>
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * 
  * @param <T>
  *            the type of the object

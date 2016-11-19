@@ -5,6 +5,12 @@ wavefront-simple release history
 0.3.0 - 2016/11/20
 ------------------
 
+- fix Javadoc that broke the build
+
+
+0.3.0 - 2016/11/20
+------------------
+
 - Add Operations that can be applied to things.
   Operations work immutable and create a copy of the
   object operated on.
