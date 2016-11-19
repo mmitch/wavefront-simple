@@ -36,11 +36,11 @@ repositories {
 }
 
 dependencies {
-	compile 'de.cgarbs:wavefront-simple:0.1.0'
+	compile 'de.cgarbs:wavefront-simple:0.3.0'
 }
 ```
 
-Note: You should propably update the version number (``0.1.0`` in the
+Note: You should propably update the version number (``0.3.0`` in the
 example above) to the most current version (see the ``HISTORY`` file).
 
 The same coordinates should work for Maven projects, too.

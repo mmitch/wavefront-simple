@@ -2,7 +2,7 @@ wavefront-simple release history
 ================================
 
 
-0.3.0 - unreleased
+0.3.0 - 2016/11/20
 ------------------
 
 - Add Operations that can be applied to things.
