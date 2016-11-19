@@ -4,6 +4,12 @@ language: java
 jdk:
   - oraclejdk8
 
+# also check jar and javadoc commands used during publish task
+script:
+  - gradle check
+  - gradle jar
+  - gradle javadoc
+  
 # Codecov.io test coverage report
 # see https://github.com/codecov/example-java
 before_script:
