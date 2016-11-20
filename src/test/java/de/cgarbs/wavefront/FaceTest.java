@@ -50,6 +50,13 @@ public class FaceTest
 	}
 
 	@Test
+	public void faceIsNeverEqualToAnotherClass()
+	{
+		Face face = new Face(new V(1, 2, 3), new V(-1, -2, -3), new V(-3, 3, 0));
+		assertThat(face, not(new V(1, 2, 3)));
+	}
+
+	@Test
 	public void compareToSortsByVertexCoundFollowedBySortedVertices()
 	{
 		Face f1 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0), new V(3, 3, 3));
