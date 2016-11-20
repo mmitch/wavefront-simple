@@ -26,7 +26,7 @@ class ObjWriter
 
 	}
 
-	private PrintStream createOrKeepPrintStream(OutputStream os)
+	PrintStream createOrKeepPrintStream(OutputStream os)
 	{
 		if (os instanceof PrintStream)
 		{
