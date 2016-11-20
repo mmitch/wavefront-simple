@@ -17,16 +17,36 @@ import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
 import de.cgarbs.wavefront.op.Program;
 
-// TODO: make class public, otherwise Obj.addFace(Face) is bogus
-class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox, Centerable<Face>
+/**
+ * A face is a surface bounded by its vertices.
+ * 
+ * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
+ * @since 0.4.0
+ *
+ */
+public class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox, Centerable<Face>
 {
 
 	private List<V> vertices = new ArrayList<>();
 
+	/**
+	 * Creates a new face bounded by the given vertices. At least
+	 * three vertices must be present.
+	 * 
+	 * @param v1
+	 *            first vertex
+	 * @param v2
+	 *            second vertex
+	 * @param v3
+	 *            third vertex
+	 * @param additionalVertices
+	 *            additional vertices
+	 * @since 0.4.0
+	 */
 	public Face(V v1, V v2, V v3, V... additionalVertices)
 	{
 		// TODO: delegate to plain List constructor? but building an
-		// intermediate List is unneeded overhead
+		// intermediate List is unnecessary overhead
 		vertices.add(v1);
 		vertices.add(v2);
 		vertices.add(v3);
@@ -38,6 +58,11 @@ class Face implements Comparable<Face>, Operable<Face>, HasBoundingBox, Centerab
 		this.vertices.addAll(vertices);
 	}
 
+	/**
+	 * returns a Stream of the Face's vertices
+	 * 
+	 * @return the vertices of this Face
+	 */
 	public Stream<V> vertices()
 	{
 		return vertices.stream();
