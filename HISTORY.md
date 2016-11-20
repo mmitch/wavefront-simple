@@ -2,6 +2,13 @@ wavefront-simple release history
 ================================
 
 
+0.4.0 - 2016/11/20
+------------------
+
+- Triplet.equals() now also compares shorthands *[incompatible]*
+- Face class is now public
+
+
 0.3.0 - 2016/11/20
 ------------------
 
