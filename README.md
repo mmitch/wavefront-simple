@@ -61,6 +61,15 @@ dependencies
  - further dependencies are fetched automatically, see ``build.gradle``
 
 
+further plans
+-------------
+
+ - add showcase to README (eg. this input creates this output)
+ - add some primitives (eg. cube)
+ - add rotation operation(?)
+ - add colores/textures(?)
+ 
+
 copyright
 ---------
 
