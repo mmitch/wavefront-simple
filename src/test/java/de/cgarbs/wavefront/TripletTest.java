@@ -52,6 +52,14 @@ public class TripletTest
 		assertThat(t1, not(t2));
 	}
 
+	@Test
+	public void tripletDoesNotEqualTripletWithDifferentShorthand()
+	{
+		Triplet t1 = new TestableTriplet(1, 2, 3, "a");
+		Triplet t2 = new TestableTriplet(1, 2, 3, "bb");
+		assertThat(t1, not(t2));
+	}
+
 	class TestableTriplet extends Triplet
 	{
 

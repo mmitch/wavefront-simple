@@ -61,8 +61,8 @@ abstract class Triplet implements Comparable<Triplet>
 		{
 			return false;
 		}
-		Triplet v = (Triplet) o;
-		return this.x == v.x && this.y == v.y && this.z == v.z;
+		Triplet that = (Triplet) o;
+		return this.x == that.x && this.y == that.y && this.z == that.z && this.shorthand.equals(that.shorthand);
 	}
 
 	@Override
