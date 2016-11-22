@@ -5,6 +5,21 @@ apply plugin: 'java'
 sourceCompatibility = '1.8'
 
 
+apply plugin: 'eclipse'
+/* generate eclipse project, disable compiler warnings on tests */
+eclipse {
+	classpath {
+		file {
+			whenMerged { classpath ->
+			 	classpath.entries.findAll{entry -> entry.kind == 'src' && entry.path == 'src/test/java'}.each{
+			 		entry -> entry.entryAttributes['ignore_optional_problems'] = true
+			 	}
+			}
+		}
+	}
+}
+
+
 apply plugin: 'jacoco'
 /* generate Java code coverage reports */
 jacocoTestReport {
