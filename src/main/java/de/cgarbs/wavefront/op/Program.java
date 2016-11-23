@@ -31,30 +31,33 @@ public class Program implements Operation
 	@Override
 	public double applyX(double x)
 	{
-		for (Operation operation : operations)
-		{
-			x = operation.applyX(x);
-		}
-		return x;
+		return applyForAll((operation, value) -> operation.applyX(value), x);
 	}
 
 	@Override
 	public double applyY(double y)
 	{
-		for (Operation operation : operations)
-		{
-			y = operation.applyY(y);
-		}
-		return y;
+		return applyForAll((operation, value) -> operation.applyY(value), y);
 	}
 
 	@Override
 	public double applyZ(double z)
 	{
+		return applyForAll((operation, value) -> operation.applyZ(value), z);
+	}
+
+	private double applyForAll(DoubleBiDoubleFunction<Operation> func, double value)
+	{
 		for (Operation operation : operations)
 		{
-			z = operation.applyZ(z);
+			value = func.applyAsDouble(operation, value);
 		}
-		return z;
+		return value;
+	}
+
+	@FunctionalInterface
+	interface DoubleBiDoubleFunction<T>
+	{
+		double applyAsDouble(T t, double value);
 	}
 }
