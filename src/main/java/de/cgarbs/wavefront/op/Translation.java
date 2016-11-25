@@ -4,6 +4,8 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+
 import de.cgarbs.wavefront.Vec;
 
 /**
@@ -31,21 +33,21 @@ public class Translation implements Operation
 	}
 
 	@Override
-	public double applyX(double x)
+	public BigDecimal applyX(BigDecimal x)
 	{
-		return x + vector.getX();
+		return x.add(vector.getX());
 	}
 
 	@Override
-	public double applyY(double y)
+	public BigDecimal applyY(BigDecimal y)
 	{
-		return y + vector.getY();
+		return y.add(vector.getY());
 	}
 
 	@Override
-	public double applyZ(double z)
+	public BigDecimal applyZ(BigDecimal z)
 	{
-		return z + vector.getZ();
+		return z.add(vector.getZ());
 	}
 
 }

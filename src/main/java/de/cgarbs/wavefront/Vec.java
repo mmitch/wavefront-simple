@@ -4,6 +4,8 @@
  */
 package de.cgarbs.wavefront;
 
+import java.math.BigDecimal;
+
 import de.cgarbs.wavefront.op.Operable;
 import de.cgarbs.wavefront.op.Operation;
 
@@ -11,6 +13,8 @@ import de.cgarbs.wavefront.op.Operation;
  * A vector in 3D space.
  * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
+ * 
+ * @since 0.3.0
  *
  */
 public class Vec extends Triplet implements Operable<Vec>
@@ -26,8 +30,27 @@ public class Vec extends Triplet implements Operable<Vec>
 	 *            y offset
 	 * @param z
 	 *            z offset
+	 * @since 0.3.0
 	 */
 	public Vec(double x, double y, double z)
+	{
+		super(x, y, z, "Vec");
+	}
+
+	/**
+	 * Creates a new vector with the given dimensions.
+	 * 
+	 * TODO: find proper names for this
+	 * 
+	 * @param x
+	 *            x offset
+	 * @param y
+	 *            y offset
+	 * @param z
+	 *            z offset
+	 * @since 0.5.0
+	 */
+	public Vec(BigDecimal x, BigDecimal y, BigDecimal z)
 	{
 		super(x, y, z, "Vec");
 	}
@@ -43,9 +66,9 @@ public class Vec extends Triplet implements Operable<Vec>
 	public Vec(Coordinate from, Coordinate to)
 	{
 		this( //
-				to.getX() - from.getX(), //
-				to.getY() - from.getY(), //
-				to.getZ() - from.getZ() //
+				to.getX().subtract(from.getX()), //
+				to.getY().subtract(from.getY()), //
+				to.getZ().subtract(from.getZ()) //
 		);
 	}
 

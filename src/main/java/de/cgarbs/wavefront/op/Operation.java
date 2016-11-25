@@ -4,6 +4,8 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+
 /**
  * An operation that can act on 3D coordinates.
  * 
@@ -21,7 +23,7 @@ public interface Operation
 	 *            old x coordinate
 	 * @return new x coordinate
 	 */
-	double applyX(double x);
+	BigDecimal applyX(BigDecimal x);
 
 	/**
 	 * Applies the operation to the y coordinate
@@ -31,7 +33,7 @@ public interface Operation
 	 *            old y coordinate
 	 * @return new y coordinate
 	 */
-	double applyY(double y);
+	BigDecimal applyY(BigDecimal y);
 
 	/**
 	 * Applies the operation to the z coordinate
@@ -41,5 +43,5 @@ public interface Operation
 	 *            old z coordinate
 	 * @return new z coordinate
 	 */
-	double applyZ(double z);
+	BigDecimal applyZ(BigDecimal z);
 }

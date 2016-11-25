@@ -32,19 +32,19 @@ abstract class Triplet implements Comparable<Triplet>
 		this.shorthand = shorthand;
 	}
 
-	public double getX()
+	public BigDecimal getX()
 	{
-		return x.doubleValue();
+		return x;
 	}
 
-	public double getY()
+	public BigDecimal getY()
 	{
-		return y.doubleValue();
+		return y;
 	}
 
-	public double getZ()
+	public BigDecimal getZ()
 	{
-		return z.doubleValue();
+		return z;
 	}
 
 	@Override
@@ -74,9 +74,10 @@ abstract class Triplet implements Comparable<Triplet>
 			return false;
 		}
 		Triplet that = (Triplet) o;
-		return this.x.equals(that.x) //
-				&& this.y.equals(that.y) //
-				&& this.z.equals(that.z) //
+
+		return equalsIgnoreScale(this.x, that.x) //
+				&& equalsIgnoreScale(this.y, that.y) //
+				&& equalsIgnoreScale(this.z, that.z) //
 				&& this.shorthand.equals(that.shorthand);
 	}
 
@@ -85,6 +86,11 @@ abstract class Triplet implements Comparable<Triplet>
 	{
 		// TODO: use real BigDecimal format
 		return String.format("%s[%.1f %.1f %.1f]", shorthand, x, y, z);
+	}
+
+	private static boolean equalsIgnoreScale(BigDecimal bd1, BigDecimal bd2)
+	{
+		return bd1.compareTo(bd2) == 0;
 	}
 
 }

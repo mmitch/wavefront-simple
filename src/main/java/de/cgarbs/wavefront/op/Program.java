@@ -4,6 +4,9 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+import java.util.function.BiFunction;
+
 /**
  * A simple program consisting of multiple Operations.
  * 
@@ -29,35 +32,29 @@ public class Program implements Operation
 	}
 
 	@Override
-	public double applyX(double x)
+	public BigDecimal applyX(BigDecimal x)
 	{
 		return applyForAll((operation, value) -> operation.applyX(value), x);
 	}
 
 	@Override
-	public double applyY(double y)
+	public BigDecimal applyY(BigDecimal y)
 	{
 		return applyForAll((operation, value) -> operation.applyY(value), y);
 	}
 
 	@Override
-	public double applyZ(double z)
+	public BigDecimal applyZ(BigDecimal z)
 	{
 		return applyForAll((operation, value) -> operation.applyZ(value), z);
 	}
 
-	private double applyForAll(DoubleBiDoubleFunction<Operation> func, double value)
+	private BigDecimal applyForAll(BiFunction<Operation, BigDecimal, BigDecimal> func, BigDecimal value)
 	{
 		for (Operation operation : operations)
 		{
-			value = func.applyAsDouble(operation, value);
+			value = func.apply(operation, value);
 		}
 		return value;
-	}
-
-	@FunctionalInterface
-	interface DoubleBiDoubleFunction<T>
-	{
-		double applyAsDouble(T t, double value);
 	}
 }

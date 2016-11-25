@@ -4,22 +4,17 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+
 import de.cgarbs.wavefront.Coordinate;
 
 abstract class Accumulator implements Operation
 {
-	protected double x;
-	protected double y;
-	protected double z;
+	protected BigDecimal x;
+	protected BigDecimal y;
+	protected BigDecimal z;
 
-	Accumulator(double init)
-	{
-		this.x = init;
-		this.y = init;
-		this.z = init;
-	}
-
-	abstract double function(double oldValue, double newValue);
+	abstract BigDecimal function(BigDecimal oldValue, BigDecimal newValue);
 
 	/**
 	 * Returns the calculated result of this operation.
@@ -34,26 +29,35 @@ abstract class Accumulator implements Operation
 	}
 
 	@Override
-	public double applyX(double x)
+	public BigDecimal applyX(BigDecimal x)
 	{
-		this.x = function(this.x, x);
+		this.x = functionOrInit(this.x, x);
 
 		return x;
 	}
 
 	@Override
-	public double applyY(double y)
+	public BigDecimal applyY(BigDecimal y)
 	{
-		this.y = function(this.y, y);
+		this.y = functionOrInit(this.y, y);
 
 		return y;
 	}
 
 	@Override
-	public double applyZ(double z)
+	public BigDecimal applyZ(BigDecimal z)
 	{
-		this.z = function(this.z, z);
+		this.z = functionOrInit(this.z, z);
 
 		return z;
+	}
+
+	private BigDecimal functionOrInit(BigDecimal oldValue, BigDecimal newValue)
+	{
+		if (oldValue == null)
+		{
+			return newValue;
+		}
+		return function(oldValue, newValue);
 	}
 }

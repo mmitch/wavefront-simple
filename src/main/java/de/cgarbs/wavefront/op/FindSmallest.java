@@ -4,6 +4,8 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+
 /**
  * This operation keeps the smallest value of
  * each encountered x, y and z coordinates.
@@ -15,20 +17,10 @@ package de.cgarbs.wavefront.op;
  */
 public class FindSmallest extends Accumulator
 {
-	/**
-	 * default constructor
-	 * 
-	 * @since 0.3.0
-	 */
-	public FindSmallest()
-	{
-		super(Double.POSITIVE_INFINITY);
-	}
-
 	@Override
-	protected double function(double oldValue, double newValue)
+	protected BigDecimal function(BigDecimal oldValue, BigDecimal newValue)
 	{
-		return newValue < oldValue ? newValue : oldValue;
+		return oldValue.min(newValue);
 	}
 
 }

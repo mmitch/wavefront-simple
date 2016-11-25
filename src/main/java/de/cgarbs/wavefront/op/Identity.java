@@ -4,6 +4,8 @@
  */
 package de.cgarbs.wavefront.op;
 
+import java.math.BigDecimal;
+
 /**
  * The identity operation does nothing, it maps
  * the source to unchanged to the output (propably
@@ -17,19 +19,19 @@ public class Identity implements Operation
 {
 
 	@Override
-	public double applyX(double x)
+	public BigDecimal applyX(BigDecimal x)
 	{
 		return x;
 	}
 
 	@Override
-	public double applyY(double y)
+	public BigDecimal applyY(BigDecimal y)
 	{
 		return y;
 	}
 
 	@Override
-	public double applyZ(double z)
+	public BigDecimal applyZ(BigDecimal z)
 	{
 		return z;
 	}
