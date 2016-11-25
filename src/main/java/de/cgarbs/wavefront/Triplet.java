@@ -4,15 +4,27 @@
  */
 package de.cgarbs.wavefront;
 
+import java.math.BigDecimal;
+
 abstract class Triplet implements Comparable<Triplet>
 {
 
-	private final double x;
-	private final double y;
-	private final double z;
+	private final BigDecimal x;
+	private final BigDecimal y;
+	private final BigDecimal z;
 	private final String shorthand;
 
 	protected Triplet(double x, double y, double z, String shorthand)
+	{
+		this( //
+				BigDecimal.valueOf(x), //
+				BigDecimal.valueOf(y), //
+				BigDecimal.valueOf(z), //
+				shorthand //
+		);
+	}
+
+	protected Triplet(BigDecimal x, BigDecimal y, BigDecimal z, String shorthand)
 	{
 		this.x = x;
 		this.y = y;
@@ -22,29 +34,29 @@ abstract class Triplet implements Comparable<Triplet>
 
 	public double getX()
 	{
-		return x;
+		return x.doubleValue();
 	}
 
 	public double getY()
 	{
-		return y;
+		return y.doubleValue();
 	}
 
 	public double getZ()
 	{
-		return z;
+		return z.doubleValue();
 	}
 
 	@Override
 	public int compareTo(Triplet that)
 	{
-		int c = compare(this.z, that.z);
+		int c = that.z.compareTo(this.z);
 		if (c == 0)
 		{
-			c = compare(this.y, that.y);
+			c = that.y.compareTo(this.y);
 			if (c == 0)
 			{
-				c = compare(this.x, that.x);
+				c = that.x.compareTo(this.x);
 			}
 		}
 		return c;
@@ -62,26 +74,17 @@ abstract class Triplet implements Comparable<Triplet>
 			return false;
 		}
 		Triplet that = (Triplet) o;
-		return this.x == that.x && this.y == that.y && this.z == that.z && this.shorthand.equals(that.shorthand);
+		return this.x.equals(that.x) //
+				&& this.y.equals(that.y) //
+				&& this.z.equals(that.z) //
+				&& this.shorthand.equals(that.shorthand);
 	}
 
 	@Override
 	public String toString()
 	{
+		// TODO: use real BigDecimal format
 		return String.format("%s[%.1f %.1f %.1f]", shorthand, x, y, z);
-	}
-
-	private int compare(double d1, double d2)
-	{
-		if (d2 > d1)
-		{
-			return 1;
-		}
-		if (d2 < d1)
-		{
-			return -1;
-		}
-		return 0;
 	}
 
 }
