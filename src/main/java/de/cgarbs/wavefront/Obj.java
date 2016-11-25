@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.cgarbs.wavefront.meta.ArgSupplier;
 import de.cgarbs.wavefront.op.FindGreatest;
@@ -134,4 +135,13 @@ public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
 		}
 		return true;
 	}
+
+	@Override
+	public String toString()
+	{
+		return faces.stream() //
+				.map(Face::toString) //
+				.collect(Collectors.joining(" ", "O{", "}"));
+	}
+
 }
