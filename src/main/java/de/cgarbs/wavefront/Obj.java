@@ -6,6 +6,7 @@ package de.cgarbs.wavefront;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import de.cgarbs.wavefront.meta.ArgSupplier;
@@ -106,4 +107,31 @@ public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
 		);
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof Obj))
+		{
+			return false;
+		}
+		Obj obj = (Obj) o;
+		if (this.faces.size() != obj.faces.size())
+		{
+			return false;
+		}
+		Iterator<Face> ours = this.faces.stream().sorted().iterator();
+		Iterator<Face> theirs = obj.faces.stream().sorted().iterator();
+		while (ours.hasNext())
+		{
+			if (!ours.next().equals(theirs.next()))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }

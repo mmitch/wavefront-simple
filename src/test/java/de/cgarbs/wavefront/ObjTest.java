@@ -117,6 +117,31 @@ public class ObjTest
 		assertThat(bb.getSecond(), is(new Coordinate(10, 6, 8)));
 	}
 
+	@Test
+	public void objsWithDifferentFacesAreNotEqual()
+	{
+		Obj obj1 = new Obj();
+		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+
+		Obj obj2 = new Obj();
+		obj2.addFace(new V(1, 1, 1), new V(0, 1, 0), new V(1, 0, 0));
+		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+
+		assertThat(obj1, not(obj2));
+	}
+
+	@Test
+	public void objsWithEqualFacesAreEqual()
+	{
+		Obj obj1 = new Obj();
+		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+
+		Obj obj2 = new Obj();
+		obj2.addFace(new V(1, 0, 0), new V(0, 1, 0), new V(0, 0, 1));
+
+		assertThat(obj1, is(obj2));
+	}
+
 	ArgSupplier<ObjWriter, List<Face>> getMockedSupplier(final List<Face> captureList)
 	{
 		return (arg) -> {
