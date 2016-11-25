@@ -64,10 +64,10 @@ dependencies
 further plans
 -------------
 
+ - add cube primitive with two-coordinate form and side length
  - add showcase to README (eg. this input creates this output)
- - add some primitives (eg. cube)
  - add rotation operation(?)
- - add colores/textures(?)
+ - add colors/textures(?)
  
 
 copyright
