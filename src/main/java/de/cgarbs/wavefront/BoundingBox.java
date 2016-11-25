@@ -14,7 +14,7 @@ import de.cgarbs.wavefront.op.Translation;
  * 
  * The Bounding Box is described by just two coordinates: one having the
  * smallest x, y and z coordinates and one having the greatest x, y, z
- * coordinates of aht cuboids vertices.
+ * coordinates of that cuboid's vertices.
  * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  *
