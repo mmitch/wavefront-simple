@@ -60,6 +60,30 @@ public class TripletTest
 		assertThat(t1, not(t2));
 	}
 
+	@Test
+	public void smallXisSortedBeforeLargeX()
+	{
+		Triplet t1 = new TestableTriplet(-1, 0, 0, "a");
+		Triplet t2 = new TestableTriplet(1, 0, 0, "a");
+		assertThat(t1.compareTo(t2), is(1));
+	}
+
+	@Test
+	public void smallYisSortedBeforeLargeY()
+	{
+		Triplet t1 = new TestableTriplet(0, -2, 0, "a");
+		Triplet t2 = new TestableTriplet(0, -1, 0, "a");
+		assertThat(t1.compareTo(t2), is(1));
+	}
+
+	@Test
+	public void smallZisSortedBeforeLargeZ()
+	{
+		Triplet t1 = new TestableTriplet(0, 0, 1, "a");
+		Triplet t2 = new TestableTriplet(0, 0, -1, "a");
+		assertThat(t1.compareTo(t2), is(-1));
+	}
+
 	class TestableTriplet extends Triplet
 	{
 

@@ -44,7 +44,7 @@ abstract class Triplet implements Comparable<Triplet>
 			c = compare(this.y, that.y);
 			if (c == 0)
 			{
-				compare(this.x, that.x);
+				c = compare(this.x, that.x);
 			}
 		}
 		return c;
