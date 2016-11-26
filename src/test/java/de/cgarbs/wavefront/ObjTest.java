@@ -13,6 +13,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -26,10 +27,9 @@ public class ObjTest
 	public void writingToFilePassesFacesToWriter()
 	{
 		// given
-		Obj obj = new Obj();
+		Obj obj = new Obj(new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)));
 		List<Face> captureList = new ArrayList<>();
 		obj.objWriterSupplier = getMockedSupplier(captureList);
-		obj.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
 
 		// when
 		obj.writeTo(new NullOutputStream());
@@ -53,9 +53,7 @@ public class ObjTest
 				new V(10, 4, 3) //
 		);
 
-		Obj obj = new Obj();
-		obj.addFace(face1);
-		obj.addFace(face2);
+		Obj obj = new Obj(face1, face2);
 
 		Translation tl = new Translation(new Vec(0.5, 1, 2));
 
@@ -63,10 +61,31 @@ public class ObjTest
 		Obj newObj = obj.apply(tl);
 
 		// then
-		assertThat(obj.faces.get(0), is(face1));
-		assertThat(obj.faces.get(1), is(face2));
-		assertThat(newObj.faces.get(0), is(face1.apply(tl)));
-		assertThat(newObj.faces.get(1), is(face2.apply(tl)));
+		assertThat(getFace(obj, 0), is(face1));
+		assertThat(getFace(obj, 1), is(face2));
+		assertThat(getFace(newObj, 0), is(face1.apply(tl)));
+		assertThat(getFace(newObj, 1), is(face2.apply(tl)));
+	}
+
+	@Test
+	public void addFaceCreatesCopyAndDoesNotChangeOriginalObject()
+	{
+		// given
+		Face face = new Face(//
+				new V(1, 2, 3), //
+				new V(2, -6, -8), //
+				new V(-10, 4, -3) //
+		);
+
+		Obj obj = new Obj();
+
+		// when
+		Obj newObj = obj.addFace(face);
+
+		// then
+		assertThat(obj.stream().count(), is(0L));
+		assertThat(newObj, not(sameInstance(obj)));
+		assertThat(getFace(newObj, 0), is(face));
 	}
 
 	@Test
@@ -79,8 +98,7 @@ public class ObjTest
 				new V(-10, 4, -3) //
 		);
 
-		Obj obj = new Obj();
-		obj.addFace(face);
+		Obj obj = new Obj(face);
 
 		Translation tl = new Translation(new Vec(0.5, 1, 2));
 
@@ -88,9 +106,9 @@ public class ObjTest
 		Obj newObj = obj.apply(tl);
 
 		// then
-		assertThat(obj.faces.get(0), sameInstance(face));
+		assertThat(getFace(obj, 0), sameInstance(face));
 		assertThat(newObj, not(sameInstance(obj)));
-		assertThat(newObj.faces.get(0), not(sameInstance(face)));
+		assertThat(getFace(newObj, 0), not(sameInstance(face)));
 	}
 
 	@Test
@@ -107,9 +125,7 @@ public class ObjTest
 				new V(10, 4, 3) //
 		);
 
-		Obj obj = new Obj();
-		obj.addFace(face1);
-		obj.addFace(face2);
+		Obj obj = new Obj(face1, face2);
 
 		BoundingBox bb = obj.getBoundingBox();
 
@@ -120,12 +136,14 @@ public class ObjTest
 	@Test
 	public void objsWithDifferentFacesAreNotEqual()
 	{
-		Obj obj1 = new Obj();
-		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+		Obj obj1 = new Obj( //
+				new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)) //
+		);
 
-		Obj obj2 = new Obj();
-		obj2.addFace(new V(1, 1, 1), new V(0, 1, 0), new V(1, 0, 0));
-		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+		Obj obj2 = new Obj( //
+				new Face(new V(1, 1, 1), new V(0, 1, 0), new V(1, 0, 0)), //
+				new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)) //
+		);
 
 		assertThat(obj1, not(obj2));
 	}
@@ -133,11 +151,9 @@ public class ObjTest
 	@Test
 	public void objsWithEqualFacesAreEqual()
 	{
-		Obj obj1 = new Obj();
-		obj1.addFace(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+		Obj obj1 = new Obj(new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)));
 
-		Obj obj2 = new Obj();
-		obj2.addFace(new V(1, 0, 0), new V(0, 1, 0), new V(0, 0, 1));
+		Obj obj2 = new Obj(new Face(new V(1, 0, 0), new V(0, 1, 0), new V(0, 0, 1)));
 
 		assertThat(obj1, is(obj2));
 	}
@@ -149,4 +165,9 @@ public class ObjTest
 			return mock(ObjWriter.class);
 		};
 	};
+
+	private static Face getFace(Obj o, int i)
+	{
+		return o.stream().collect(Collectors.toList()).get(i);
+	}
 }

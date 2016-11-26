@@ -4,55 +4,73 @@
  */
 package de.cgarbs.wavefront;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import de.cgarbs.wavefront.meta.ArgSupplier;
-import de.cgarbs.wavefront.op.FindGreatest;
-import de.cgarbs.wavefront.op.FindSmallest;
-import de.cgarbs.wavefront.op.Operable;
-import de.cgarbs.wavefront.op.Operation;
-import de.cgarbs.wavefront.op.Program;
 
 /**
- * minimal Wavefront .obj file writer
+ * Represents a 3D Object consisting of multiple {@link Face}s.
  * 
- * This allows you to write files describing 3D models.
- * Viewer not included.
+ * An Object can be written to a file in Wavefront.obj format
+ * to be viewed with an external 3D model viewer.
  * 
  * See file format description at
- * https://en.wikipedia.org/wiki/Wavefront_.obj_file}
- * 
- * This class represents an Object/a full Scene.
+ * https://en.wikipedia.org/wiki/Wavefront_.obj_file
  * 
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.1.0
- *
  */
-public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
+public class Obj extends Container<Obj, Face>
 {
 	ArgSupplier<ObjWriter, List<Face>> objWriterSupplier = ObjWriter::new;
 
-	List<Face> faces = new ArrayList<>();
-
 	/**
-	 * Adds a face to the object.
+	 * Creates an Object consisting of the given Faces.
 	 * 
-	 * @param face
-	 *            the face
-	 * @since 0.2.0
+	 * @param faces
+	 *            the Faces of the Object
+	 * @since 0.6.0
 	 */
-	public void addFace(Face face)
+	public Obj(Face... faces)
 	{
-		faces.add(face);
+		this(Arrays.asList(faces));
 	}
 
 	/**
-	 * Adds a face to the object. Convenience method
-	 * to be called with at least three vertices.
+	 * Creates an Object consisting of the given Faces.
+	 * 
+	 * @param faces
+	 *            the Faces of the Object
+	 * @since 0.6.0
+	 */
+	public Obj(List<Face> faces)
+	{
+		super("O", faces);
+	}
+
+	/**
+	 * Creates a copy of this Object with an additional Face.
+	 * 
+	 * @param face
+	 *            the face
+	 * @return the new Obj with the additional Face
+	 * @since 0.6.0
+	 */
+	public Obj addFace(Face face)
+	{
+		return getInstance(Stream //
+				.concat(stream(), Stream.of(face)) //
+				.collect(toList()));
+	}
+
+	/**
+	 * Creates a copy of this Object with an additional Face.
+	 * Convenience method to be called with at least three Vertices.
 	 * 
 	 * 
 	 * @param v1
@@ -63,16 +81,20 @@ public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
 	 *            third vertex
 	 * @param additionalVertices
 	 *            possible further vertices of the face
-	 * @since 0.1.0
+	 * @return the new Obj with the additional Face
+	 * @since 0.6.0
 	 */
-	public void addFace(V v1, V v2, V v3, V... additionalVertices)
+	public Obj addFace(V v1, V v2, V v3, V... additionalVertices)
 	{
-		addFace(new Face(v1, v2, v3, additionalVertices));
+		return addFace(new Face(v1, v2, v3, additionalVertices));
 	}
 
 	/**
 	 * Writes the .obj file to an OutputStream.
 	 * Does not close the stream after writing.
+	 * 
+	 * See file format description at
+	 * https://en.wikipedia.org/wiki/Wavefront_.obj_file
 	 * 
 	 * @param os
 	 *            the OutputStream to write to
@@ -80,68 +102,13 @@ public class Obj implements Operable<Obj>, HasBoundingBox, Centerable<Obj>
 	 */
 	public void writeTo(OutputStream os)
 	{
-		objWriterSupplier.get(faces).writeTo(os);
+		objWriterSupplier.get(stream().collect(toList())).writeTo(os);
 	}
 
 	@Override
-	public Obj apply(Operation operation)
+	protected Obj getInstance(List<Face> faces)
 	{
-		Obj ret = new Obj();
-		faces.stream() //
-				.map((f) -> f.apply(operation)) //
-				.forEach(ret::addFace);
-		return ret;
-	}
-
-	@Override
-	public BoundingBox getBoundingBox()
-	{
-		FindSmallest smallest = new FindSmallest();
-		FindGreatest greatest = new FindGreatest();
-		Program program = new Program(smallest, greatest);
-
-		faces.stream().map(Face::getBoundingBox).flatMap(BoundingBox::stream).forEach((c) -> c.apply(program));
-
-		return new BoundingBox( //
-				smallest.getResult(), //
-				greatest.getResult() //
-		);
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if (this == o)
-		{
-			return true;
-		}
-		if (!(o instanceof Obj))
-		{
-			return false;
-		}
-		Obj obj = (Obj) o;
-		if (this.faces.size() != obj.faces.size())
-		{
-			return false;
-		}
-		Iterator<Face> ours = this.faces.stream().sorted().iterator();
-		Iterator<Face> theirs = obj.faces.stream().sorted().iterator();
-		while (ours.hasNext())
-		{
-			if (!ours.next().equals(theirs.next()))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public String toString()
-	{
-		return faces.stream() //
-				.map(Face::toString) //
-				.collect(Collectors.joining(" ", "O{", "}"));
+		return new Obj(faces);
 	}
 
 }
