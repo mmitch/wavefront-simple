@@ -94,7 +94,6 @@ further plans
 -------------
 
  - add Scene (like Obj, but containing multiple Objs)
- - extract common container interface (Scene, Obj, Face, …)
  - add rotation operation(?)
  - add colors/textures(?)
  
