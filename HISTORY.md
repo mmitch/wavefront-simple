@@ -2,6 +2,15 @@ wavefront-simple release history
 ================================
 
 
+0.5.0 - 2016/11/27
+------------------
+
+- use BigDecimal internally instead of double
+- add Cube and Cuboid primitives
+- fix x coordinate in Triplet.compare()
+- add Obj.equals() and Obj.toString()
+
+
 0.4.0 - 2016/11/20
 ------------------
 
