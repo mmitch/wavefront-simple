@@ -16,6 +16,35 @@ describing 3D models.
 The project homepage is at https://github.com/mmitch/wavefront-simple
 
 
+example
+-------
+
+This code
+```java
+		// generate a cube at (0, 0, 0) with edge length 1
+		Cube cube = new Cube(Coordinate.ORIGIN, 1);
+		// write object to file
+		cube.writeTo(new FileOutputStream("/tmp/cube.obj"));
+```
+creates an `.obj` file that looks like this:
+```
+V 1 1 1
+V 0 1 1
+V 1 0 1
+V 0 0 1
+V 1 1 0
+V 0 1 0
+V 1 0 0
+V 0 0 0
+f 8 7 3 4
+f 6 5 1 2
+f 8 6 2 4
+f 7 5 1 3
+f 8 6 5 7
+f 4 2 1 3
+```
+
+
 usage
 -----
 
@@ -64,7 +93,6 @@ dependencies
 further plans
 -------------
 
- - add showcase to README (eg. this input creates this output)
  - add Scene (like Obj, but containing multiple Objs)
  - extract common container interface (Scene, Obj, Face, …)
  - add rotation operation(?)
