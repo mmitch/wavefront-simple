@@ -64,7 +64,6 @@ dependencies
 further plans
 -------------
 
- - add cube primitive with two-coordinate form and side length
  - add showcase to README (eg. this input creates this output)
  - add Scene (like Obj, but containing multiple Objs)
  - extract common container interface (Scene, Obj, Face, …)
