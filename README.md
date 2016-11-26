@@ -94,6 +94,7 @@ further plans
 -------------
 
  - add Scene (like Obj, but containing multiple Objs)
+ - extract Writable interface (Obj, Scene)
  - add rotation operation(?)
  - add colors/textures(?)
  
