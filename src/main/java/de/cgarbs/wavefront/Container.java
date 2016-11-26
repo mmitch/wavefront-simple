@@ -18,8 +18,8 @@ import de.cgarbs.wavefront.op.Program;
 abstract class Container<SELF, DATA extends Operable<DATA> & Comparable<? super DATA>> //
 		implements Comparable<Container<SELF, DATA>>, Centerable<SELF>
 {
-	private List<DATA> data;
-	private String shorthand;
+	private final List<DATA> data;
+	private final String shorthand;
 
 	protected Container(String shorthand, List<DATA> data)
 	{
