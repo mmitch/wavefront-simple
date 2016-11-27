@@ -28,20 +28,20 @@ This code
 ```
 creates an `.obj` file that looks like this:
 ```
-V 1 1 1
-V 0 1 1
-V 1 0 1
-V 0 0 1
-V 1 1 0
-V 0 1 0
-V 1 0 0
 V 0 0 0
-f 8 7 3 4
-f 6 5 1 2
-f 8 6 2 4
-f 7 5 1 3
-f 8 6 5 7
-f 4 2 1 3
+V 0 0 1
+V 0 1 0
+V 0 1 1
+V 1 0 0
+V 1 0 1
+V 1 1 0
+V 1 1 1
+f 1 3 4 2
+f 1 3 7 5
+f 1 5 6 2
+f 2 4 8 6
+f 3 7 8 4
+f 5 7 8 6
 ```
 
 
@@ -93,7 +93,6 @@ dependencies
 further plans
 -------------
 
- - reverse Vertex sorting (example .obj file above looks backward)
  - centralize tests from Container subclasses into ContainerTest
  - add rotation operation(?)
  - add colors/textures(?)

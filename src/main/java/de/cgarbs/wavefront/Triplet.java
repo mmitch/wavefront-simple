@@ -50,13 +50,13 @@ abstract class Triplet implements Comparable<Triplet>
 	@Override
 	public int compareTo(Triplet that)
 	{
-		int c = that.z.compareTo(this.z);
+		int c = this.x.compareTo(that.x);
 		if (c == 0)
 		{
-			c = that.y.compareTo(this.y);
+			c = this.y.compareTo(that.y);
 			if (c == 0)
 			{
-				c = that.x.compareTo(this.x);
+				c = this.z.compareTo(that.z);
 			}
 		}
 		return c;

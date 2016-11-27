@@ -78,7 +78,7 @@ abstract class Container<SELF, DATA extends Operable<DATA> & Comparable<? super 
 			Iterator<DATA> theirs = that.data.stream().sorted().iterator();
 			while (c == 0 && ours.hasNext())
 			{
-				c = theirs.next().compareTo(ours.next());
+				c = ours.next().compareTo(theirs.next());
 			}
 		}
 		return c;
