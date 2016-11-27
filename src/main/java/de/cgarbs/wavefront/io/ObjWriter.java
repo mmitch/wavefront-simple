@@ -63,6 +63,7 @@ class ObjWriter
 								.map((vertex) -> uniqueVertices.indexOf(vertex) + 1) //
 								.map(String::valueOf) //
 								.collect(Collectors.joining(" "))) //
+				.sorted() //
 				.forEach((vertices) -> ps.printf("f %s\n", vertices));
 	}
 }
