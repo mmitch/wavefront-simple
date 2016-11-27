@@ -65,7 +65,7 @@ public class TripletTest
 	{
 		Triplet t1 = new TestableTriplet(-1, 0, 0, "a");
 		Triplet t2 = new TestableTriplet(1, 0, 0, "a");
-		assertThat(t1.compareTo(t2), is(1));
+		assertThat(t1.compareTo(t2), is(-1));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class TripletTest
 	{
 		Triplet t1 = new TestableTriplet(0, -2, 0, "a");
 		Triplet t2 = new TestableTriplet(0, -1, 0, "a");
-		assertThat(t1.compareTo(t2), is(1));
+		assertThat(t1.compareTo(t2), is(-1));
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class TripletTest
 	{
 		Triplet t1 = new TestableTriplet(0, 0, 1, "a");
 		Triplet t2 = new TestableTriplet(0, 0, -1, "a");
-		assertThat(t1.compareTo(t2), is(-1));
+		assertThat(t1.compareTo(t2), is(1));
 	}
 
 	class TestableTriplet extends Triplet

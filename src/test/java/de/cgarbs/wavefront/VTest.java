@@ -2,10 +2,11 @@ package de.cgarbs.wavefront;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.collection.IsArrayContainingInOrder.arrayContaining;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -35,15 +36,18 @@ public class VTest
 	}
 
 	@Test
-	public void sortsByColumn()
+	public void sortSmallestCoordinatesFirst()
 	{
-		V v1 = new V(2, 2, 1);
-		V v2 = new V(0, 5, 2);
-		V v3 = new V(1, 1, 2);
-		V v4 = new V(0, 2, 3);
-		V[] arr = new V[] { v1, v2, v3, v4 };
-		Arrays.sort(arr);
-		assertThat(arr, arrayContaining(v4, v2, v3, v1));
+		V v1 = new V(1, 1, 1);
+		V v2 = new V(-1, -1, -1);
+		V v3 = new V(-1, 0, 0);
+		V v4 = new V(0, 1, 0);
+		V v5 = new V(0, 1, -1);
+
+		List<V> vertices = Arrays.asList(v1, v2, v3, v4, v5);
+		vertices.sort(Comparator.naturalOrder());
+
+		assertThat(vertices, is(Arrays.asList(v2, v3, v5, v4, v1)));
 	}
 
 	@Test
