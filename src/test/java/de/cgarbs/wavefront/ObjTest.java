@@ -153,6 +153,20 @@ public class ObjTest
 		assertThat(obj1, is(obj2));
 	}
 
+	@Test
+	public void addingVerticesIsTheSameAsAddingACompleteFace()
+	{
+		V v1 = new V(0, 3, 9);
+		V v2 = new V(2, -13, 99);
+		V v3 = new V(-17, 71, 33);
+
+		Obj empty = new Obj();
+		Obj addV = empty.addFace(v1, v2, v3);
+		Obj addFace = empty.addFace(new Face(v1, v2, v3));
+
+		assertThat(addV, is(addFace));
+	}
+
 	private static Face getFace(Obj o, int i)
 	{
 		return o.stream().collect(Collectors.toList()).get(i);
