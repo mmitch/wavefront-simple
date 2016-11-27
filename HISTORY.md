@@ -2,7 +2,15 @@ wavefront-simple release history
 ================================
 
 
-0.5.0 - 2016/11/27
+0.6.0 - 2016/11/27
+------------------
+
+- make Obj immutable *[incompatible]*
+    - addFace() returns a new instance, original instance stays unchanged
+- add Scene consisting of multiple Objs
+
+
+0.5.0 - 2016/11/26
 ------------------
 
 - use BigDecimal internally instead of double
