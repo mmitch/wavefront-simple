@@ -57,7 +57,7 @@ public class FaceTest
 	}
 
 	@Test
-	public void compareToSortsByVertexCoundFollowedBySortedVertices()
+	public void compareToSortsByVertexCountFollowedBySortedVertices()
 	{
 		Face f1 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0), new V(3, 3, 3));
 		Face f2 = new Face(new V(0, 0, 0), new V(0, 1, 1), new V(2, 0, 0));
@@ -69,7 +69,7 @@ public class FaceTest
 	}
 
 	@Test
-	public void boundingBoxIstToSmallestAndGreatestCoordinates()
+	public void boundingBoxConsistsOfSmallestAndGreatestCoordinates()
 	{
 		Face f = new Face(new V(1, 3, 9), new V(-2, -17, 12), new V(0, 18, -1));
 
