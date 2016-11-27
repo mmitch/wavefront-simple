@@ -5,6 +5,8 @@
 package de.cgarbs.wavefront.primitive;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import de.cgarbs.wavefront.Coordinate;
 import de.cgarbs.wavefront.Face;
@@ -53,6 +55,11 @@ public class Cuboid extends Obj
 	 */
 	public Cuboid(Coordinate coordinate1, Coordinate coordinate2)
 	{
+		super(getFaces(coordinate1, coordinate2));
+	}
+
+	private static List<Face> getFaces(Coordinate coordinate1, Coordinate coordinate2)
+	{
 		BigDecimal x1 = coordinate1.getX();
 		BigDecimal y1 = coordinate1.getY();
 		BigDecimal z1 = coordinate1.getZ();
@@ -76,12 +83,14 @@ public class Cuboid extends Obj
 		Face front = new Face(leftBottomFront, leftTopFront, rightTopFront, rightBottomFront);
 		Face back = new Face(leftBottomBack, leftTopBack, rightTopBack, rightBottomBack);
 
-		addFace(bottom);
-		addFace(top);
-		addFace(left);
-		addFace(right);
-		addFace(front);
-		addFace(back);
+		return Arrays.asList( //
+				bottom, //
+				top, //
+				left, //
+				right, //
+				front, //
+				back //
+		);
 	}
 
 }

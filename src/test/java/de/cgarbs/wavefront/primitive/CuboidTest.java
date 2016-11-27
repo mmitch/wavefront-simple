@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import de.cgarbs.wavefront.Coordinate;
+import de.cgarbs.wavefront.Face;
 import de.cgarbs.wavefront.Obj;
 import de.cgarbs.wavefront.V;
 import de.cgarbs.wavefront.Vec;
@@ -21,15 +22,16 @@ public class CuboidTest
 	{
 		Cuboid c = new Cuboid(new Coordinate(0, 0, 0), new Coordinate(2, 3, 4));
 
-		Obj expected = new Obj();
-		expected.addFace(new V(0, 0, 0), new V(0, 0, 4), new V(0, 3, 4), new V(0, 3, 0));
-		expected.addFace(new V(2, 0, 0), new V(2, 0, 4), new V(2, 3, 4), new V(2, 3, 0));
+		Obj expected = new Obj( //
+				new Face(new V(0, 0, 0), new V(0, 0, 4), new V(0, 3, 4), new V(0, 3, 0)), //
+				new Face(new V(2, 0, 0), new V(2, 0, 4), new V(2, 3, 4), new V(2, 3, 0)), //
 
-		expected.addFace(new V(0, 0, 0), new V(0, 0, 4), new V(2, 0, 4), new V(2, 0, 0));
-		expected.addFace(new V(0, 3, 0), new V(0, 3, 4), new V(2, 3, 4), new V(2, 3, 0));
+				new Face(new V(0, 0, 0), new V(0, 0, 4), new V(2, 0, 4), new V(2, 0, 0)), //
+				new Face(new V(0, 3, 0), new V(0, 3, 4), new V(2, 3, 4), new V(2, 3, 0)), //
 
-		expected.addFace(new V(0, 0, 0), new V(0, 3, 0), new V(2, 3, 0), new V(2, 0, 0));
-		expected.addFace(new V(0, 0, 4), new V(0, 3, 4), new V(2, 3, 4), new V(2, 0, 4));
+				new Face(new V(0, 0, 0), new V(0, 3, 0), new V(2, 3, 0), new V(2, 0, 0)), //
+				new Face(new V(0, 0, 4), new V(0, 3, 4), new V(2, 3, 4), new V(2, 0, 4)) //
+		);
 
 		assertThat(c, is(expected));
 	}
