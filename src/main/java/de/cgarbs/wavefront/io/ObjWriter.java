@@ -59,10 +59,10 @@ class ObjWriter
 	{
 		faces.stream() //
 				.map( //
-						(f) -> f.vertices() //
-								.map((face) -> uniqueVertices.indexOf(face) + 1) //
+						(face) -> face.vertices() //
+								.map((vertex) -> uniqueVertices.indexOf(vertex) + 1) //
 								.map(String::valueOf) //
-								.collect(Collectors.joining(" ")))//
-				.forEach((s) -> ps.printf("f %s\n", s));
+								.collect(Collectors.joining(" "))) //
+				.forEach((vertices) -> ps.printf("f %s\n", vertices));
 	}
 }
