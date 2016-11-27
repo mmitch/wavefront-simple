@@ -5,7 +5,11 @@
 package de.cgarbs.wavefront.primitive;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -19,6 +23,30 @@ public class CuboidTest
 {
 	@Test
 	public void cuboidCreates6FacewWith8Vertices()
+	{
+		Cuboid c = new Cuboid(new Coordinate(0, 0, 0), new Coordinate(2, 3, 4));
+
+		Obj expected = new Obj( //
+				new Face(new V(0, 0, 0), new V(0, 0, 4), new V(0, 3, 4), new V(0, 3, 0)), //
+				new Face(new V(2, 0, 0), new V(2, 0, 4), new V(2, 3, 4), new V(2, 3, 0)), //
+
+				new Face(new V(0, 0, 0), new V(0, 0, 4), new V(2, 0, 4), new V(2, 0, 0)), //
+				new Face(new V(0, 3, 0), new V(0, 3, 4), new V(2, 3, 4), new V(2, 3, 0)), //
+
+				new Face(new V(0, 0, 0), new V(0, 3, 0), new V(2, 3, 0), new V(2, 0, 0)), //
+				new Face(new V(0, 0, 4), new V(0, 3, 4), new V(2, 3, 4), new V(2, 0, 4)) //
+		);
+
+		Set<V> uniqueVertices = c.faces().stream() //
+				.flatMap(Face::vertices) //
+				.collect(Collectors.toSet());
+
+		assertThat(c.faces(), hasSize(6));
+		assertThat(uniqueVertices, hasSize(8));
+	}
+
+	@Test
+	public void cuboidhasExpectedVertices()
 	{
 		Cuboid c = new Cuboid(new Coordinate(0, 0, 0), new Coordinate(2, 3, 4));
 
