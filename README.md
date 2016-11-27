@@ -70,7 +70,7 @@ dependencies {
 ```
 
 Note: You should propably update the version number (``0.4.0`` in the
-example above) to the most current version (see the ``HISTORY`` file).
+example above) to the most current version (see the ``HISTORY.md`` file).
 
 The same coordinates should work for Maven projects, too.
 
@@ -93,7 +93,8 @@ dependencies
 further plans
 -------------
 
- - extract Writable interface (Obj, Scene)
+ - reverse Vertex sorting (example .obj file above looks backward)
+ - centralize tests from Container subclasses into ContainerTest
  - add rotation operation(?)
  - add colors/textures(?)
  
