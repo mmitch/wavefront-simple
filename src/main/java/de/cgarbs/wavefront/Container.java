@@ -46,15 +46,17 @@ abstract class Container<SELF, DATA extends Operable<DATA> & Comparable<? super 
 		{
 			return false;
 		}
-		// FIXME: because of type erasure, empty Containers of different types
-		// will be equal!
-		Container<?, ?> c = (Container<?, ?>) o;
-		if (this.data.size() != c.data.size())
+		Container<?, ?> that = (Container<?, ?>) o;
+		if (!this.shorthand.equals(that.shorthand))
+		{
+			return false;
+		}
+		if (this.data.size() != that.data.size())
 		{
 			return false;
 		}
 		Iterator<DATA> ours = this.data.stream().sorted().iterator();
-		Iterator<?> theirs = c.data.stream().sorted().iterator();
+		Iterator<?> theirs = that.data.stream().sorted().iterator();
 		while (ours.hasNext())
 		{
 			if (!ours.next().equals(theirs.next()))
