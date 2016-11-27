@@ -6,13 +6,12 @@ package de.cgarbs.wavefront;
 
 import static java.util.stream.Collectors.toList;
 
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import de.cgarbs.wavefront.meta.ArgSupplier;
+import de.cgarbs.wavefront.io.Writable;
 
 /**
  * Represents a 3D Scene consisting of multiple {@link Obj}ects.
@@ -26,11 +25,9 @@ import de.cgarbs.wavefront.meta.ArgSupplier;
  * @author Christian Garbs &lt;mitch@cgarbs.de&gt;
  * @since 0.6.0
  */
-public class Scene extends Container<Scene, Obj>
+public class Scene extends Container<Scene, Obj> implements Writable
 {
 	private static final String SHORTHAND = "S";
-
-	ArgSupplier<ObjWriter, List<Face>> objWriterSupplier = ObjWriter::new;
 
 	/**
 	 * Creates a Scene consisting of the given Objects.
@@ -71,26 +68,6 @@ public class Scene extends Container<Scene, Obj>
 				.collect(toList()));
 	}
 
-	/**
-	 * Writes the .obj file to an OutputStream.
-	 * Does not close the stream after writing.
-	 * 
-	 * See file format description at
-	 * https://en.wikipedia.org/wiki/Wavefront_.obj_file
-	 * 
-	 * @param os
-	 *            the OutputStream to write to
-	 * @since 0.1.0
-	 */
-	public void writeTo(OutputStream os)
-	{
-		objWriterSupplier
-				.get(stream() //
-						.flatMap(Obj::stream) //
-						.collect(toList())) //
-				.writeTo(os);
-	}
-
 	@Override
 	protected Scene getInstance(List<Obj> objects)
 	{
@@ -103,6 +80,14 @@ public class Scene extends Container<Scene, Obj>
 		return stream() //
 				.map(Obj::toString) //
 				.collect(Collectors.joining("\n  ", SHORTHAND + "{\n  ", "\n}"));
+	}
+
+	@Override
+	public List<Face> faces()
+	{
+		return stream() //
+				.flatMap(Obj::stream) //
+				.collect(toList());
 	}
 
 }

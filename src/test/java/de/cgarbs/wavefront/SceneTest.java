@@ -7,36 +7,28 @@ package de.cgarbs.wavefront;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import de.cgarbs.wavefront.meta.ArgSupplier;
-import de.cgarbs.wavefront.test.util.NullOutputStream;
-
 public class SceneTest
 {
 	@Test
-	public void writingToFilePassesFacesToWriter()
+	public void facesContainsAllFaces()
 	{
-		// given
-		Face face = new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
-		Scene scene = new Scene(new Obj(face));
-		List<Face> captureList = new ArrayList<>();
-		scene.objWriterSupplier = getMockedSupplier(captureList);
+		Face face1 = new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0));
+		Face face2 = new Face(new V(4, 4, 1), new V(0, 1, 3), new V(1, 2, 0));
+		Face face3 = new Face(new V(-5, 4, 2), new V(0, 0, 0), new V(-7, 4, 0));
 
-		// when
-		scene.writeTo(new NullOutputStream());
+		Obj obj1 = new Obj(face1);
+		Obj obj2 = new Obj(face2, face3);
 
-		// then
-		assertThat(captureList, hasSize(1));
-		assertThat(captureList.get(0), is(face));
+		Scene scene = new Scene(obj1, obj2);
+
+		assertThat(scene.faces(), is(Arrays.asList(face1, face2, face3)));
 	}
 
 	@Test
@@ -83,14 +75,6 @@ public class SceneTest
 								"  " + obj2.toString() + "\n" + //
 								"}"));
 	}
-
-	ArgSupplier<ObjWriter, List<Face>> getMockedSupplier(final List<Face> captureList)
-	{
-		return (arg) -> {
-			captureList.addAll(arg);
-			return mock(ObjWriter.class);
-		};
-	};
 
 	private static Obj getScene(Scene s, int i)
 	{

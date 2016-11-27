@@ -7,35 +7,30 @@ package de.cgarbs.wavefront;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import de.cgarbs.wavefront.meta.ArgSupplier;
 import de.cgarbs.wavefront.op.Translation;
-import de.cgarbs.wavefront.test.util.NullOutputStream;
 
 public class ObjTest
 {
 	@Test
-	public void writingToFilePassesFacesToWriter()
+	public void facesContainsAllFaces()
 	{
 		// given
-		Obj obj = new Obj(new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)));
-		List<Face> captureList = new ArrayList<>();
-		obj.objWriterSupplier = getMockedSupplier(captureList);
+		List<Face> faces = Arrays.asList( //
+				new Face(new V(0, 0, 1), new V(0, 1, 0), new V(1, 0, 0)), //
+				new Face(new V(4, 4, 1), new V(0, 1, 3), new V(1, 2, 0)) //
+		);
 
-		// when
-		obj.writeTo(new NullOutputStream());
+		Obj obj = new Obj(faces);
 
-		// then
-		assertThat(captureList, hasSize(1));
+		assertThat(obj.faces(), is(faces));
 	}
 
 	@Test
@@ -157,14 +152,6 @@ public class ObjTest
 
 		assertThat(obj1, is(obj2));
 	}
-
-	ArgSupplier<ObjWriter, List<Face>> getMockedSupplier(final List<Face> captureList)
-	{
-		return (arg) -> {
-			captureList.addAll(arg);
-			return mock(ObjWriter.class);
-		};
-	};
 
 	private static Face getFace(Obj o, int i)
 	{

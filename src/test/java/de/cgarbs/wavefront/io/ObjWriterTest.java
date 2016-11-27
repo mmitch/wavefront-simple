@@ -2,7 +2,7 @@
  * Copyright 2016 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
-package de.cgarbs.wavefront;
+package de.cgarbs.wavefront.io;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -16,6 +16,9 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import de.cgarbs.wavefront.Face;
+import de.cgarbs.wavefront.V;
+import de.cgarbs.wavefront.io.ObjWriter;
 import de.cgarbs.wavefront.test.util.CaptureOutputStream;
 
 public class ObjWriterTest

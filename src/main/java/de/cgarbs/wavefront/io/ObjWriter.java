@@ -1,4 +1,4 @@
-package de.cgarbs.wavefront;
+package de.cgarbs.wavefront.io;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -6,6 +6,9 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
+
+import de.cgarbs.wavefront.Face;
+import de.cgarbs.wavefront.V;
 
 class ObjWriter
 {
