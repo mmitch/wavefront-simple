@@ -29,7 +29,6 @@ jacocoTestReport {
 	}
 }
 
-
 apply plugin: 'com.cinnober.gradle.semver-git'
 /* deduce build version number from git tags
    source: https://github.com/cinnober/semver-git */
@@ -39,6 +38,22 @@ buildscript {
 	}
 	dependencies {
 		classpath group: 'com.cinnober.gradle', name: 'semver-git', version: '2.2.1'
+	}
+}
+
+
+apply plugin: 'info.solidsoft.pitest'
+/* mutation testing plugin
+   see: https://pitest.org https://gradle-pitest-plugin.solidsoft.info */
+pitest {
+	targetClasses = ['de.cgarbs.wavefront.*']
+}
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath group: 'info.solidsoft.gradle.pitest', name: 'gradle-pitest-plugin', version: '1.1.11'
 	}
 }
 
