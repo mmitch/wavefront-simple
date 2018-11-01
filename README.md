@@ -9,9 +9,9 @@ simple wavefront file writer
 about
 -----
 
-This is a very simple writer for the [Wavefront .obj]
-(https://en.wikipedia.org/wiki/Wavefront_.obj_file) file format
-describing 3D models.
+This is a very simple writer for the
+[Wavefront .obj](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
+file format describing 3D models.
 
 The project homepage is at https://github.com/mmitch/wavefront-simple
 
